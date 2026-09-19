@@ -1,0 +1,17 @@
+.DS_Store
+**/.DS_Store
+
+# Local environment and credential files
+.env
+.env.*
+!.env.example
+
+# Common editor and temporary files
+.idea/
+.vscode/
+*.swp
+*.tmp
+*~
+
+# Study PDFs are stored separately in iCloud
+*.pdf
