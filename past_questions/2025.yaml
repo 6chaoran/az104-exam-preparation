@@ -404,3 +404,112 @@
     Exam distinction: VNet peering is non-transitive by default. Gateway transit allows a peered VNet to use a supported gateway in another VNet, while service chaining and UDRs explicitly direct traffic through a gateway or network virtual appliance in a peered VNet.
 
     [Microsoft Learn: Azure Virtual Network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
+
+- id: 808
+  question: |
+    You have an Azure subscription that contains two peered virtual networks named VNet1 and VNet2. You have a Network Virtual Appliance (NVA) named NetVA1. You need to ensure that the traffic from VNet1 to VNet2 is inspected by using NetVA1. What should you use?
+  choices:
+    A: A local network gateway.
+    B: A route table that has custom routes.
+    C: A service endpoint.
+    D: IP address reservations.
+  answer: B
+  user_answer: B
+  user_result: correct
+  user_reasoning: Recognized that custom routes are required to direct traffic between the peered virtual networks through the network virtual appliance for inspection.
+  explanation: |
+    Correct answer: **B. A route table that has custom routes.**
+
+    Create a route table containing a user-defined route (UDR) for VNet2's address space, set the next hop type to **Virtual appliance**, and specify NetVA1's private IP address as the next hop. Associate the route table with the relevant subnet in VNet1. A corresponding return route may also be required so that traffic follows a symmetric path through the NVA.
+
+    - **A:** A local network gateway represents an on-premises network or another external network endpoint for a VPN connection. It does not direct traffic through an NVA.
+    - **C:** A service endpoint provides secure access from a virtual network to supported Azure services. It does not control routing between peered virtual networks.
+    - **D:** IP address reservations assign predictable addresses but do not redirect or inspect network traffic.
+
+    Exam memory aid: to force traffic through an NVA, use a **UDR** whose next hop type is **Virtual appliance**.
+
+    [Microsoft Learn: Virtual network traffic routing](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview)
+
+- id: 809
+  question: |
+    You deploy Azure virtual machines to three Azure regions. Each region contains a virtual network. Each virtual network contains multiple subnets peered in a full mesh topology. Each subnet contains a network security group (NSG) that has defined rules. A user reports that he cannot use port 33000 to connect from a virtual machine in one region to a virtual machine in another region. Which two options can you use to diagnose the issue? (Each correct answer presents a complete solution. Choose two.)
+  choices:
+    A: Effective security rules.
+    B: Azure Monitor Network Insights.
+    C: IP flow verify.
+    D: Azure Virtual Network Manager.
+    E: Connection troubleshoot.
+  answer:
+    - C
+    - E
+  user_answer:
+    - A
+    - E
+  user_result: incorrect
+  user_reasoning: Selected Effective security rules and Connection troubleshoot, but Effective security rules only displays the rules applied to a network interface and does not test the reported flow.
+  learning_note: For a specific VM-to-VM port connectivity problem, use IP flow verify to evaluate that exact flow against NSG rules and Connection troubleshoot to test the end-to-end path.
+  explanation: |
+    Correct answers: **C. IP flow verify** and **E. Connection troubleshoot.**
+
+    **IP flow verify** evaluates a specified TCP or UDP flow against the NSG rules applied to a virtual machine's network interface. For this scenario, provide the source and destination IP addresses, TCP, port 33000, and the relevant direction. The result states whether the flow is allowed or denied and identifies the matching NSG rule.
+
+    **Connection troubleshoot** tests end-to-end connectivity from the source VM to the destination VM and port. It can identify a blocking NSG, route, DNS issue, or other problem along the path.
+
+    - **A:** Effective security rules displays the aggregate NSG rules that apply to a network interface, but it does not diagnose the specific connection attempt.
+    - **B:** Azure Monitor Network Insights provides monitoring and topology insights; it is not the targeted diagnostic tool for this individual flow.
+    - **D:** Azure Virtual Network Manager centrally manages network connectivity and security configurations. It is not a diagnostic tool for a failed port connection.
+
+    Exam memory aid: **one exact packet decision = IP flow verify; whole path and reachability = Connection troubleshoot.**
+
+    [Microsoft Learn: Troubleshoot virtual network peering problems](https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-network/virtual-network-troubleshoot-peering-issues)
+
+- id: 810
+  question: |
+    You have an Azure web app named webapp1. You have a virtual network named VNET1 and an Azure virtual machine named VM1 that hosts a MySQL database. VM1 connects to VNET1. You need to ensure that webapp1 can access the data hosted on VM1. What should you do?
+  choices:
+    A: Deploy an internal load balancer.
+    B: Peer VNET1 to another virtual network.
+    C: Deploy an Azure Application Gateway.
+    D: Connect webapp1 to VNET1.
+  answer: D
+  user_answer: D
+  user_result: correct
+  user_reasoning: Recognized that the web app needs virtual network integration to reach the private IP address of the MySQL database VM.
+  explanation: |
+    Correct answer: **D. Connect webapp1 to VNET1.**
+
+    Configure **App Service VNet Integration** for webapp1. VNet Integration provides outbound connectivity from the web app to resources in VNET1, including the MySQL database hosted on VM1 through its private IP address.
+
+    - **A:** An internal load balancer distributes traffic to backend resources. It does not provide the web app with network connectivity to VNET1.
+    - **B:** VNet peering connects two virtual networks, but webapp1 is not itself deployed into a virtual network. It first requires VNet Integration.
+    - **C:** Azure Application Gateway is a Layer 7 load balancer and reverse proxy. It does not provide the web app with outbound access to VM1.
+
+    Exam memory aid: App Service needs to reach private resources in a VNet → configure **VNet Integration**.
+
+    [Microsoft Learn: Integrate your app with an Azure virtual network](https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration)
+
+- id: 811
+  question: |
+    You have an Azure subscription that contains a virtual machine named VM1. You plan to deploy an Azure Monitor alert rule that will trigger an alert when CPU usage on VM1 exceeds 80 percent. You need to ensure that the alert rule sends an email message to two users named User1 and User2. What should you create for Azure Monitor?
+  choices:
+    A: An action group.
+    B: A mail-enabled security group.
+    C: A distribution group.
+    D: A Microsoft 365 group.
+  answer: A
+  user_answer: B
+  user_result: incorrect
+  user_reasoning: Guessed that a mail-enabled security group would provide the email notification recipients.
+  learning_note: Azure Monitor alert rules invoke action groups. Email-enabled groups can be recipients, but they do not replace the Azure Monitor action group that defines the notification action.
+  explanation: |
+    Correct answer: **A. An action group.**
+
+    An Azure Monitor alert rule uses an action group to define what happens when the alert fires. Configure the action group with email notification actions for User1 and User2, and associate it with the CPU alert rule.
+
+    - **B:** A mail-enabled security group combines permission management with a group email address. Its address could be an email recipient in an action group, but it does not replace the action group.
+    - **C:** A distribution group distributes email to multiple recipients. It could also be configured as a recipient, but the alert rule still requires an action group to send the notification.
+    - **D:** A Microsoft 365 group provides collaboration resources such as a shared mailbox, calendar, and SharePoint site. It is not the Azure Monitor resource that defines alert actions.
+
+    Exam memory aid: **Alert condition → alert rule → action group → email recipients.**
+
+    [Microsoft Learn: Create and manage action groups in Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups)

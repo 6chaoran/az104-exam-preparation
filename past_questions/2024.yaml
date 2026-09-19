@@ -1,0 +1,276 @@
+- id: 741
+  question: |
+    You have an Azure Storage account named storage1. You need to enable a user named User1 to
+    list and regenerate storage account keys for storage1.
+    Solution: You assign the Reader and Data Access role to User1.
+    Does this meet the goal?
+  choices:
+    A: Yes
+    B: No
+  answer: B
+  user_answer: B
+  user_result: correct
+  user_reasoning: Believed that Reader and Data Access was insufficient and that a role with storage account key management permissions was required.
+  learning_note: User1 does not need a broad administrator role. Use the least-privileged Storage Account Key Operator Service Role to list and regenerate storage account keys.
+  explanation: |
+    Correct answer: **B. No.**
+
+    The Reader and Data Access role includes the permission to list storage account keys, but it does not include the separate `Microsoft.Storage/storageAccounts/regeneratekey/action` permission required to regenerate them. Therefore, the proposed role does not satisfy both requirements.
+
+    Assign the **Storage Account Key Operator Service Role** to User1 at the scope of storage1. This role grants both required permissions:
+
+    - `Microsoft.Storage/storageAccounts/listkeys/action`
+    - `Microsoft.Storage/storageAccounts/regeneratekey/action`
+
+    A broad administrator role is unnecessary. The Storage Account Key Operator Service Role follows least privilege by granting the specific key-management operations required.
+
+    [Microsoft Learn: Azure built-in roles for Storage](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/storage#storage-account-key-operator-service-role)
+- id: 742
+  question: |
+    You have an Azure container registry named Registry1 that contains an image named image1. You
+    receive an error message when you attempt to deploy a container instance by using image1. You
+    need to be able to deploy a container instance by using image1.
+    Solution: You assign the AcrPull role to ACR-Tasks-Network for Registry1.
+    Does this meet the goal?
+  choices:
+    A: Yes
+    B: No
+  answer: B
+  user_answer: B
+  user_result: correct
+  user_reasoning: Believed that AcrPull was not the correct role for deploying a container instance because the image workflow also involves building, tagging, and pushing.
+  learning_note: AcrPull is sufficient to deploy an existing image, but it must be assigned to the managed identity or service principal used by Azure Container Instances, not to ACR-Tasks-Network.
+  explanation: |
+    Correct answer: **B. No.**
+
+    The **AcrPull** role is the correct role for deploying a container instance from an existing image in a private Azure Container Registry. Azure Container Instances only needs to pull the image during deployment; it does not need permission to build, tag, or push it.
+
+    However, the solution assigns the role to the wrong identity. **ACR-Tasks-Network** is associated with ACR Tasks and is not the identity used by the container instance to authenticate to Registry1.
+
+    Assign **AcrPull** on Registry1 to the identity that Azure Container Instances uses to retrieve the image, such as:
+
+    - A user-assigned managed identity attached to the container group; or
+    - A service principal whose credentials are supplied during deployment.
+
+    In short: the proposed solution uses the right role but assigns it to the wrong identity.
+
+    [Microsoft Learn: Deploy to Azure Container Instances from Azure Container Registry using a managed identity](https://learn.microsoft.com/en-us/azure/container-instances/using-azure-container-registry-mi)
+- id: 743
+  question: |
+    You have an Azure virtual machine named VM1. VM1 was deployed by using a custom Azure
+    Resource Manager template named ARM1.json. You receive a notification that VM1 will be affected
+    by maintenance. You need to move VM1 to a different host immediately.
+    Solution: From the resource group blade, move VM1 to another subscription.
+    Does this meet the goal?
+  choices:
+    A: Yes
+    B: No
+  answer: B
+  user_answer: B
+  user_result: correct
+  user_reasoning: Correctly determined that moving VM1 to another subscription does not necessarily move it to a different physical host, but suggested moving it to another availability set.
+  learning_note: To move an Azure VM to another physical host immediately, redeploy the VM. A subscription move changes its administrative and billing scope, while an availability set provides resilience for multiple VMs rather than performing an immediate host migration.
+  explanation: |
+    Correct answer: **B. No.**
+
+    Moving VM1 to another subscription changes its administrative and billing scope, but it does not move the VM to another physical Azure host. Therefore, the proposed solution does not meet the goal.
+
+    To move VM1 to a different host immediately, use **Redeploy** from the VM's **Redeploy + reapply** page. Azure shuts down the VM, moves it to a new Azure node, and then powers it back on while retaining its configuration and associated resources.
+
+    Moving VM1 to an availability set is not the correct immediate action. Availability sets distribute multiple VMs across fault and update domains to improve application resilience; they are not used to trigger an immediate host migration. An existing VM also generally must be recreated to place it in an availability set.
+
+    Redeployment causes temporary downtime, and data stored on temporary or ephemeral disks can be lost.
+
+    [Microsoft Learn: Redeploy a virtual machine to a new Azure node](https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/redeploy-to-new-node-linux)
+- id: 744
+  question: |
+    You have an app named App1 that is installed on two Azure virtual machines named VM1 and
+    VM2. Connections to App1 are managed by using an Azure Load Balancer. The effective network
+    security configurations for VM2 are shown in the exhibit.
+
+    You discover that connections to App1 from 131.107.100.50 over TCP port 443 fail. You verify that
+    the Load Balancer rules are configured correctly. You need to ensure that connections to App1 can
+    be established successfully from 131.107.100.50 over TCP port 443.
+
+    Solution: You create an inbound security rule that allows any traffic from the AzureLoadBalancer
+    source and has a priority of 150.
+    Does this meet the goal?
+  choices:
+    A: Yes
+    B: No
+  answer: A
+  user_answer: B
+  user_result: incorrect
+  user_reasoning: Selected No without accounting for the higher-priority TCP 443 deny rule blocking the Azure Load Balancer health probe.
+  learning_note: Evaluate NSG rules in priority order and consider application traffic separately from health-probe traffic. The client is already allowed at priority 100, but a priority-200 deny blocks the default AzureLoadBalancer allowance at priority 65001. An AzureLoadBalancer allow rule at priority 150 restores the health probe.
+  explanation: |
+    Correct answer: **A. Yes.**
+
+    The effective NSG rules are processed from the lowest priority number to the highest:
+
+    1. Priority 100 allows TCP port 443 application traffic from `131.107.100.50`.
+    2. Priority 200 denies TCP port 443 traffic from any source.
+    3. The default priority-65001 rule allows traffic from the `AzureLoadBalancer` service tag.
+
+    Although the client traffic is already allowed at priority 100, the priority-200 deny rule is evaluated before the default priority-65001 rule. It therefore blocks the Azure Load Balancer health probe on port 443. A failed probe causes the load balancer to mark the backend as unhealthy and stop directing new application connections to it.
+
+    Adding an allow rule for the `AzureLoadBalancer` source at priority 150 places it before the priority-200 deny rule. The health probe can then succeed, and the client's application traffic continues to match the priority-100 allow rule.
+
+    In short, the effective order becomes: client allowed at 100, load-balancer health probe allowed at 150, and all other TCP 443 traffic denied at 200.
+
+    [Microsoft Learn: Troubleshoot Azure Load Balancer health probe failures](https://learn.microsoft.com/en-us/troubleshoot/azure/load-balancer/troubleshoot-load-balancer-health-probe-failures)
+- id: 745
+  question: |
+    You have a Microsoft Entra tenant. You plan to perform a bulk import of users. You need to ensure
+    that imported user objects are added automatically as the members of a specific group based on
+    each user's department. The solution must minimize administrative effort. Which two actions should
+    you perform? (Each correct answer presents part of the solution. Choose two.)
+  choices:
+    A: Create groups that use the Assigned membership type.
+    B: Create an Azure Resource Manager (ARM) template.
+    C: Create groups that use the Dynamic User membership type.
+    D: Write a PowerShell script that parses an import file.
+    E: Create an XML file that contains user information and the appropriate attributes.
+    F: Create a CSV file that contains user information and the appropriate attributes.
+  answer:
+    - C
+    - F
+  user_answer:
+    - C
+    - D
+  user_result: incorrect
+  user_reasoning: Correctly selected dynamic user groups for automatic attribute-based membership, but selected a PowerShell import script instead of the native CSV bulk-import format.
+  learning_note: Microsoft Entra bulk user creation uses a CSV file that can include the department attribute. A Dynamic User group evaluates that attribute and automatically manages membership, eliminating the need for a custom PowerShell script.
+  explanation: |
+    Correct answers: **C and F.**
+
+    Create groups that use the **Dynamic User** membership type and configure membership rules based on the `department` property. For example:
+
+    `user.department -eq "Sales"`
+
+    For the bulk user import, use the Microsoft Entra **CSV** template and populate the `department` attribute for each user. After the users are imported, Microsoft Entra evaluates their attributes and automatically adds matching users to the appropriate dynamic group.
+
+    A PowerShell script is unnecessary and would introduce additional development and maintenance effort. Assigned membership would require users to be added manually, ARM templates are not the native mechanism for bulk user creation, and the bulk-import process does not use XML.
+
+    Dynamic group membership generally requires Microsoft Entra ID P1 licensing for each unique user included in a dynamic group.
+
+    [Microsoft Learn: Bulk create users in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-add)
+
+    [Microsoft Learn: Create or update a dynamic membership group](https://learn.microsoft.com/en-us/entra/identity/users/groups-create-rule)
+- id: 746
+  question: |
+    You have an Azure subscription that contains a storage account named storage1. You need to
+    ensure that the access keys for storage1 rotate automatically. What should you configure?
+  choices:
+    A: a backup vault
+    B: redundancy for storage1
+    C: lifecycle management for storage1
+    D: an Azure key vault
+    E: a Recovery Services vault
+  answer: D
+  user_answer: B
+  user_result: incorrect
+  user_reasoning: Selected storage redundancy, which protects data availability but does not manage or rotate authentication credentials.
+  learning_note: Azure Key Vault is used to secure storage-account access keys and support an automated rotation workflow. Storage redundancy controls the number and location of data copies, not credential rotation.
+  explanation: |
+    Correct answer: **D. An Azure key vault.**
+
+    Azure Key Vault can securely store the two storage-account access keys and support an automated rotation workflow. Such a workflow can regenerate one access key, update the corresponding secret in Key Vault, and alternate between the two keys to avoid interrupting applications.
+
+    The other options serve different purposes:
+
+    - Storage redundancy controls how many copies of the data Azure maintains and where those copies reside.
+    - Lifecycle management moves blobs between access tiers or deletes them according to rules.
+    - Backup vaults and Recovery Services vaults protect supported workloads and data; they do not rotate storage-account access keys.
+
+    For modern deployments, Microsoft recommends Microsoft Entra ID authorization and managed identities instead of Shared Key authorization whenever possible.
+
+    [Microsoft Learn: Automate rotation for resources with two sets of credentials](https://learn.microsoft.com/en-us/azure/key-vault/secrets/tutorial-rotation-dual)
+- id: 747
+  question: |
+    You have a Microsoft Entra tenant named contoso.com. You collaborate with an external partner
+    named fabrikam.com. You plan to invite users in fabrikam.com to the contoso.com tenant. You
+    need to ensure that invitations can be sent only to fabrikam.com users. What should you do in the
+    Microsoft Entra admin center?
+  choices:
+    A: From Cross-tenant access settings, configure the Tenant restrictions settings.
+    B: From Cross-tenant access settings, configure the Microsoft cloud settings.
+    C: From External collaboration settings, configure the Guest user access restrictions settings.
+    D: From External collaboration settings, configure the Collaboration restrictions settings.
+  answer: D
+  user_answer: C
+  user_result: incorrect
+  user_reasoning: Selected Guest user access restrictions, which control what invited guests can view in the directory rather than which external domains can receive invitations.
+  learning_note: Use External collaboration settings > Collaboration restrictions to allow invitations only to specified domains. Guest user access restrictions apply after invitation and control guests' directory visibility.
+  explanation: |
+    Correct answer: **D. From External collaboration settings, configure the Collaboration restrictions settings.**
+
+    In the Microsoft Entra admin center, go to **External Identities > External collaboration settings**. Under **Collaboration restrictions**, select **Allow invitations only to the specified domains**, and then add `fabrikam.com` as the target domain. Invitations to domains that are not on the allowlist will be blocked.
+
+    **Guest user access restrictions** do not control which domains can receive invitations. They control what guest users can see in the contoso.com directory after they have been invited, such as whether guests can view only their own profiles or limited information about other directory objects.
+
+    Tenant restrictions control access to external tenants from managed networks, while Microsoft cloud settings configure collaboration across separate Microsoft cloud environments. Neither setting provides the required invitation-domain allowlist.
+
+    [Microsoft Learn: Allow or block invitations to B2B users from specific organizations](https://learn.microsoft.com/en-us/entra/external-id/allow-deny-list)
+- id: 748
+  question: |
+    You have an Azure subscription that contains a storage account named storage1. The storage1
+    account contains blob data. You need to assign a role to a user named User1 to ensure that the
+    user can access the blob data in storage1. The role assignment must support conditions. Which
+    two roles can you assign to User1? (Each correct answer presents a complete solution. Choose
+    two.)
+  choices:
+    A: Owner
+    B: Storage Account Contributor
+    C: Storage Account Backup Contributor
+    D: Storage Blob Data Contributor
+    E: Storage Blob Data Owner
+    F: Storage Blob Delegator
+  answer:
+    - D
+    - E
+  user_answer:
+    - D
+    - F
+  user_result: incorrect
+  user_reasoning: Correctly selected Storage Blob Data Contributor, but selected Storage Blob Delegator, which grants permission to obtain a user-delegation key rather than direct access to blob data and is not one of the supported blob roles for role-assignment conditions.
+  learning_note: Blob data access with Azure role-assignment conditions requires a role containing supported blob data actions. Storage Blob Data Contributor and Storage Blob Data Owner both qualify; Storage Blob Data Reader would also qualify but is not an answer choice.
+  explanation: |
+    Correct answers: **D and E.**
+
+    Both **Storage Blob Data Contributor** and **Storage Blob Data Owner** grant access to blob data through data-plane permissions and support Azure role-assignment conditions, also known as Azure attribute-based access control (Azure ABAC).
+
+    - Storage Blob Data Contributor can read, write, and delete blob containers and blob data.
+    - Storage Blob Data Owner provides blob data access and additional ownership-level capabilities, including assigning POSIX access control for storage accounts that use a hierarchical namespace.
+
+    **Storage Blob Delegator** permits obtaining a user-delegation key for creating user-delegation SAS tokens. It does not by itself grant access to the blob data and is not one of the built-in blob roles listed as supporting these role-assignment conditions.
+
+    The supported built-in blob roles are Storage Blob Data Reader, Storage Blob Data Contributor, and Storage Blob Data Owner. Because Storage Blob Data Reader is not offered as a choice, the correct selections are D and E.
+
+    [Microsoft Learn: Azure role-assignment condition format and syntax](https://learn.microsoft.com/en-us/azure/role-based-access-control/conditions-format)
+- id: 749
+  question: |
+    You have an Azure subscription that contains a storage account named storage1. The storage
+    account contains a blob that stores images. Client access to storage1 is granted by using a shared
+    access signature (SAS). You need to ensure that users receive a warning message when they
+    generate a SAS that exceeds a seven-day time period. What should you do for storage1?
+  choices:
+    A: Enable a read-only lock.
+    B: Configure an alert rule.
+    C: Add a lifecycle management rule.
+    D: Set Allow recommended upper limit for shared access signature (SAS) expiry interval to Enabled.
+  answer: D
+  user_answer: D
+  user_result: correct
+  user_reasoning: Correctly identified the storage account SAS expiration policy as the setting that provides a recommended upper validity interval and warns users when they exceed it.
+  learning_note: Enable the SAS expiration policy and set its upper limit to seven days. With the default Log action, an out-of-policy SAS produces a warning and can be logged but remains usable; the Block action provides strict enforcement.
+  explanation: |
+    Correct answer: **D. Set Allow recommended upper limit for shared access signature (SAS) expiry interval to Enabled.**
+
+    Enable the storage account's **SAS expiration policy** and configure the upper limit for the SAS expiry interval as seven days. When a user creates a SAS whose validity interval exceeds that limit, Azure displays a warning containing the recommended maximum interval.
+
+    With the default **Log** action, the upper limit is a recommendation: the longer-lived SAS can still be used, but a warning appears and policy violations can be written to Azure Storage logs when diagnostic logging is configured. The newer **Block** action can instead deny requests that use an out-of-policy SAS.
+
+    A read-only resource lock protects the storage account's configuration from modification, an alert rule reacts to monitoring data, and lifecycle management controls blob tiering and deletion. None of those options configures SAS validity guidance.
+
+    [Microsoft Learn: Configure an expiration policy for shared access signatures](https://learn.microsoft.com/en-us/azure/storage/common/sas-expiration-policy)
