@@ -1,0 +1,73 @@
+- id: 681
+  question: |
+    You have an Azure Active Directory (Azure AD) tenant named contoso.com. You have a CSV file
+    that contains the names and email addresses of 500 external users. You need to create a guest
+    user account in contoso.com for each of the 500 external users.
+
+    Solution: You create a PowerShell script that runs the New-MgUser cmdlet for each user.
+    Does this meet the goal?
+  choices:
+    A: Yes
+    B: No
+  answer: B
+  user_answer: B
+  user_result: correct
+  user_reasoning: Correctly selected No and suggested importing the external users from the CSV file, but incorrectly believed that a dynamic user group was required.
+  learning_note: Use the Microsoft Entra bulk-invite CSV operation or run New-MgInvitation for each CSV entry to create B2B guest users. Dynamic groups manage membership after user objects exist; they do not create or invite guest accounts.
+  explanation: |
+    Correct answer: **B. No.**
+
+    `New-MgUser` creates a directory user object, but it is not the Microsoft Entra B2B invitation workflow for external guest users. The proposed solution therefore does not meet the goal as stated.
+
+    To create the 500 guest accounts, use either:
+
+    - **Bulk invite** in the Microsoft Entra admin center and upload the users with the required CSV template; or
+    - A PowerShell script that imports the CSV file and runs `New-MgInvitation` for each external user.
+
+    A dynamic user group is not required. Dynamic groups automatically manage the membership of user objects that already exist; they do not create or invite guest accounts.
+
+    The question uses the retired name **Azure Active Directory (Azure AD)**. The current product name is **Microsoft Entra ID**.
+
+    [Microsoft Learn: Bulk invite B2B collaboration users](https://learn.microsoft.com/en-us/entra/external-id/tutorial-bulk-invite)
+
+    [Microsoft Learn: Add a guest user with Microsoft Graph PowerShell](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell)
+
+- id: 682
+  question: |
+    You have an Azure subscription named Subscription1 that contains a virtual network named VNet1.
+    VNet1 is in a resource group named RG1. A user named User1 has the following roles for
+    Subscription1:
+
+    - Reader
+    - Security Admin
+    - Security Reader
+
+    You need to ensure that User1 can assign the Reader role for VNet1 to other users. What should
+    you do?
+  choices:
+    A: Remove User1 from the Security Reader and Reader roles for Subscription1. Assign User1 the Contributor role for Subscription1.
+    B: Assign User1 the Contributor role for VNet1.
+    C: Assign User1 the Owner role for VNet1.
+    D: Assign User1 the Network Contributor role for RG1.
+  answer: C
+  user_answer: C
+  user_result: correct
+  user_reasoning: Correctly determined that the Owner role scoped to VNet1 allows User1 to grant other users Reader access to that virtual network.
+  learning_note: Contributor and Network Contributor can manage resources but cannot create Azure RBAC role assignments. Owner includes role-assignment permissions; assigning it at the VNet resource scope limits User1's authority to that resource.
+  explanation: |
+    Correct answer: **C. Assign User1 the Owner role for VNet1.**
+
+    The **Owner** role includes `Microsoft.Authorization/roleAssignments/write`, which permits User1 to assign Azure roles to other security principals. Because the Owner role is assigned at the scope of VNet1, User1 can assign the Reader role for that virtual network without receiving Owner permissions over RG1 or the entire subscription.
+
+    The existing Reader, Security Admin, and Security Reader roles do not permit User1 to create Azure RBAC role assignments. Security Admin and Security Reader relate to security management and security information; they do not provide general Azure access-management permissions.
+
+    The other options do not meet the requirement:
+
+    - **A and B:** Contributor can manage resources but cannot assign Azure roles.
+    - **D:** Network Contributor can manage network resources but cannot assign Azure roles.
+
+    In a current environment, **Role Based Access Control Administrator** at the VNet1 scope could provide more targeted access-management permissions, but that role is not one of the answer choices.
+
+    [Microsoft Learn: Azure built-in roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
+
+    [Microsoft Learn: Understand scope for Azure RBAC](https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview)

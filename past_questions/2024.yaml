@@ -274,3 +274,220 @@
     A read-only resource lock protects the storage account's configuration from modification, an alert rule reacts to monitoring data, and lifecycle management controls blob tiering and deletion. None of those options configures SAS validity guidance.
 
     [Microsoft Learn: Configure an expiration policy for shared access signatures](https://learn.microsoft.com/en-us/azure/storage/common/sas-expiration-policy)
+- id: 750
+  question: |
+    You have an Azure subscription. You plan to create an Azure container registry named ContReg1.
+    You need to ensure that you can push and pull signed images for ContReg1. What should you do
+    for ContReg1?
+  choices:
+    A: Enable encryption by using a customer-managed key.
+    B: Create a connected registry.
+    C: Add a token.
+    D: Enable content trust.
+  answer: D
+  user_answer: D
+  user_result: correct
+  user_reasoning: Correctly identified content trust as the Azure Container Registry feature used to push and pull cryptographically signed container images.
+  learning_note: Enable content trust to work with signed images in an Azure container registry. Customer-managed keys encrypt registry data, connected registries synchronize content, and tokens provide scoped repository permissions.
+  explanation: |
+    Correct answer: **D. Enable content trust.**
+
+    Azure Container Registry content trust supports pushing and pulling cryptographically signed container images. The signatures allow consumers to verify an image's publisher and integrity before using it.
+
+    The other options do not provide image signing:
+
+    - A customer-managed key controls encryption of registry data at rest.
+    - A connected registry synchronizes container content with an Azure container registry in connected or intermittently connected environments.
+    - A token provides repository-scoped authentication and permissions.
+
+    [Microsoft Learn: Content trust in Azure Container Registry](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-content-trust)
+- id: 751
+  question: |
+    You plan to deploy several Azure virtual machines that will run Windows Server 2022 in a virtual
+    machine scale set by using an Azure Resource Manager template. You need to ensure that NGINX
+    is available on all the virtual machines after they are deployed. What should you use?
+  choices:
+    A: Azure Custom Script Extension
+    B: Deployment Center in Azure App Service
+    C: Microsoft Entra Application Proxy
+    D: the Publish-AzVMDscConfiguration cmdlet
+  answer: A
+  user_answer: D
+  user_result: incorrect
+  user_reasoning: Selected Publish-AzVMDscConfiguration, which packages and publishes a PowerShell DSC configuration but does not by itself apply the configuration to the virtual machines.
+  learning_note: Use the Azure Custom Script Extension in the scale set's ARM template to download and run an installation script on every VM instance after deployment.
+  explanation: |
+    Correct answer: **A. Azure Custom Script Extension.**
+
+    The Azure Custom Script Extension downloads and runs scripts on Azure virtual machines after deployment. Adding the extension to the virtual machine scale set resource in the ARM template allows an installation script to run on every instance and install NGINX.
+
+    **Publish-AzVMDscConfiguration** compiles, packages, and optionally uploads a PowerShell Desired State Configuration script. It does not apply that configuration to the scale set instances by itself; doing so would also require the PowerShell DSC extension and its configuration.
+
+    Deployment Center is an App Service deployment feature, while Microsoft Entra Application Proxy provides remote access to on-premises web applications. Neither installs software on Azure virtual machines.
+
+    [Microsoft Learn: Custom Script Extension for Windows](https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows)
+- id: 752
+  question: |
+    You have an Azure subscription. You plan to deploy a container. You need to recommend which
+    Azure services can scale the container automatically. What should you recommend?
+  choices:
+    A: Azure Container Apps only.
+    B: Azure Container Instances only.
+    C: Azure Container Apps or Azure App Service only.
+    D: Azure Container Instances or Azure App Service only.
+    E: Azure Container Apps, Azure Container Instances, or Azure App Service.
+  answer: C
+  user_answer: A
+  user_result: incorrect
+  user_reasoning: Correctly ruled out Azure Container Instances because it lacks native automatic scaling, but incorrectly ruled out Azure App Service on the assumption that it cannot host containers.
+  learning_note: Both Azure Container Apps and Azure App Service can host and automatically scale containerized workloads. Azure Container Instances runs containers without orchestration and does not provide native autoscaling.
+  explanation: |
+    Correct answer: **C. Azure Container Apps or Azure App Service only.**
+
+    **Azure Container Apps** is a container-native platform with automatic, event-driven scaling powered by KEDA. It is well suited to APIs, microservices, background workers, and workloads that can scale to zero.
+
+    **Azure App Service** can also host custom Linux or Windows containers and supports automatic scaling. Although App Service is a managed web application platform, applications deployed to it can be packaged as containers.
+
+    **Azure Container Instances** is useful for running isolated or short-lived containers without managing servers or an orchestrator, but it does not provide native automatic scaling. Implementing scaling around ACI would require additional services and custom automation.
+
+    [Microsoft Learn: Autoscaling in Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/scale-app)
+
+    [Microsoft Learn: Automatic scaling in Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling)
+- id: 753
+  question: |
+    You have a Standard Azure App Service plan named Plan1. You need to ensure that Plan1 will
+    scale automatically when the CPU usage of the web app exceeds 80 percent. What should you
+    select for Plan1?
+  choices:
+    A: Automatic in the Scale out method settings.
+    B: Rules Based in the Scale out method settings.
+    C: Premium P1 in the Scale up (App Service plan) settings.
+    D: Standard S1 in the Scale up (App Service plan) settings.
+    E: Manual in the Scale out method settings.
+  answer: B
+  user_answer: B
+  user_result: correct
+  user_reasoning: Correctly selected rules-based scale-out, which supports an autoscale rule triggered when CPU usage exceeds a specified threshold.
+  learning_note: Use Rules Based scaling when scaling must respond to a metric threshold such as CPU usage above 80 percent. Scale up changes instance capacity, whereas scale out changes the number of instances.
+  explanation: |
+    Correct answer: **B. Rules Based in the Scale out method settings.**
+
+    Rules-based scaling lets you define Azure Monitor autoscale rules that increase or decrease the number of App Service plan instances in response to metrics. For Plan1, you can create a scale-out rule that adds instances when average CPU usage exceeds 80 percent.
+
+    **Automatic** scaling adjusts the number of instances primarily according to incoming HTTP traffic and does not provide a configurable CPU-threshold rule. **Manual** scaling maintains a selected instance count without responding automatically to metrics.
+
+    The **Scale up** options change the App Service plan's pricing tier and the compute capacity of each instance. They do not configure automatic horizontal scaling based on CPU usage.
+
+    [Microsoft Learn: Scale up an Azure App Service app](https://learn.microsoft.com/en-us/azure/app-service/manage-scale-up)
+
+    [Microsoft Learn: Get started with autoscale in Azure](https://learn.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-get-started)
+- id: 754
+  question: |
+    You have an Azure subscription. You create a routing table named RT1. You need to add a route
+    to RT1 that specifies the next hop IP address. Which next hop type should you select?
+  choices:
+    A: Internet.
+    B: Virtual network gateway.
+    C: Virtual network.
+    D: Virtual appliance.
+  answer: D
+  user_answer: D
+  user_result: correct
+  user_reasoning: Correctly selected Virtual appliance, the next-hop type that accepts a specific next-hop IP address for a firewall, router, or other network virtual appliance.
+  learning_note: Select Virtual appliance when a user-defined route must specify a next-hop private IP address. Internet, Virtual network gateway, and Virtual network use Azure-managed next hops; None drops the matching traffic.
+  explanation: |
+    Correct answer: **D. Virtual appliance.**
+
+    The **Virtual appliance** next-hop type sends matching traffic to a specified private IP address. This address typically belongs to an Azure Firewall or a third-party network virtual appliance acting as a router or firewall.
+
+    The other next-hop types use Azure-managed targets and do not accept a custom next-hop IP address:
+
+    - **Internet** sends traffic toward the public internet through Azure's routing infrastructure.
+    - **Virtual network gateway** sends traffic to a VPN gateway, typically for destinations reachable through a site-to-site VPN connection.
+    - **Virtual network** routes traffic within the virtual network by using Azure's system routing.
+
+    Azure route tables also support the **None** next-hop type, which drops matching traffic.
+
+    [Microsoft Learn: Virtual network traffic routing](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview)
+- id: 755
+  question: |
+    You have an Azure virtual network named VNet1 that contains the following settings:
+    - IPv4 address space: 172.16.10.0/24
+    - Subnet name: Subnet1
+    - Subnet address range: 172.16.10.0/25
+    What is the maximum number of virtual machines that can connect to Subnet1?
+  choices:
+    A: 24
+    B: 25
+    C: 123
+    D: 128
+  answer: C
+  user_answer: D
+  user_result: incorrect
+  user_reasoning: Correctly calculated that a /25 subnet contains 128 IP addresses and recalled that Azure reserves some addresses, but did not subtract the five Azure-reserved addresses from the total.
+  learning_note: An Azure IPv4 subnet reserves its first four addresses and its last address. Therefore, a /25 subnet has 128 total addresses but only 123 usable addresses.
+  explanation: |
+    Correct answer: **C. 123.**
+
+    A `/25` subnet contains 128 addresses: `2^(32-25) = 128`. Azure reserves five IP addresses in every subnet, so Subnet1 has `128 - 5 = 123` addresses available for virtual machine network interfaces.
+
+    For `172.16.10.0/25`, Azure reserves:
+
+    - `172.16.10.0` as the network address.
+    - `172.16.10.1` for the default gateway.
+    - `172.16.10.2` and `172.16.10.3` for Azure DNS mapping.
+    - `172.16.10.127` as the broadcast address.
+
+    Therefore, the maximum number of virtual machines that can connect to the subnet, assuming each VM consumes one private IP address, is 123.
+
+    [Microsoft Learn: Azure virtual network FAQ](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq#are-there-any-restrictions-on-using-ip-addresses-within-these-subnets)
+- id: 756
+  question: |
+    You have an Azure subscription that contains two peered virtual networks named VNet1 and VNet2.
+    VNet1 has a VPN gateway that uses static routing. The on-premises network has a VPN connection
+    that uses the VPN gateway of VNet1. You need to configure access for users on the on-premises
+    network to connect to a virtual machine on VNet2. The solution must minimize costs. Which type
+    of connectivity should you use?
+  choices:
+    A: Azure Firewall with a private IP address.
+    B: Service chaining and user-defined routes (UDRs).
+    C: Azure Application Gateway.
+    D: ExpressRoute circuits to VNet2.
+  answer: B
+  user_answer: B
+  user_result: correct
+  user_reasoning: Correctly selected service chaining and user-defined routes, which reuse the existing VPN gateway in the peered VNet and avoid the cost of deploying another connectivity service.
+  learning_note: Service chaining uses UDRs to direct traffic to a virtual appliance or virtual network gateway in a peered VNet. It is a cost-effective way for a spoke VNet to use existing hybrid connectivity when explicit routes are required.
+  explanation: |
+    Correct answer: **B. Service chaining and user-defined routes (UDRs).**
+
+    Service chaining allows VNet2 to direct traffic through the VPN gateway in the peered VNet1. Because the VPN gateway uses static routing, user-defined routes provide the required path between VNet2 and the on-premises network. This approach reuses the existing VPN gateway and therefore minimizes cost.
+
+    **Azure Firewall** would add an unnecessary paid service. **Azure Application Gateway** is a Layer 7 web traffic load balancer and does not provide general hybrid network routing. **ExpressRoute** could provide private connectivity but would require additional circuits and would cost substantially more than reusing the existing VPN connection.
+
+    [Microsoft Learn: Azure virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
+- id: 757
+  question: |
+    You have an Azure subscription that contains two peered virtual networks named VNet1 and VNet2.
+    You have a Network Virtual Appliance (NVA) named NetVA1. You need to ensure that the traffic
+    from VNet1 to VNet2 is inspected by using NetVA1. What should you use?
+  choices:
+    A: a local network gateway
+    B: a route table that has custom routes
+    C: a service endpoint
+    D: IP address reservations
+  answer: B
+  user_answer: A
+  user_result: incorrect
+  user_reasoning: Selected a local network gateway because it appeared related to network security, but a local network gateway represents an on-premises VPN device and network rather than routing traffic through an NVA for inspection.
+  learning_note: To force traffic through an NVA or firewall, create a user-defined route with Virtual appliance as the next-hop type and the appliance's private IP address as the next hop. Associate the route table with the source subnet and ensure symmetric return routing when required.
+  explanation: |
+    Correct answer: **B. A route table that has custom routes.**
+
+    Create a user-defined route for the VNet2 address range with **Virtual appliance** as the next-hop type and NetVA1's private IP address as the next-hop address. Associate the route table with the relevant subnet in VNet1. This overrides the direct peering route and forces traffic through NetVA1 for inspection.
+
+    A corresponding route from VNet2 through NetVA1 might also be required to provide symmetric routing for the return traffic.
+
+    A **local network gateway** represents an on-premises VPN device and its network address prefixes. A **service endpoint** provides private connectivity from a VNet subnet to a supported Azure service, and an **IP address reservation** does not control traffic paths. None of these options routes traffic through the NVA.
+
+    [Microsoft Learn: Route network traffic with a route table](https://learn.microsoft.com/en-us/azure/virtual-network/tutorial-create-route-table-portal)
