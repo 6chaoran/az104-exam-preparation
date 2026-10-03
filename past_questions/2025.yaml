@@ -1,4 +1,6 @@
 - id: 791
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question: |
     You have a Microsoft Entra tenant named Adatum and an Azure Subscription named Subscription1.
     Adatum contains a group named Developers. Subscription1 contains a resource group named Dev.
@@ -15,6 +17,8 @@
     - https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-securing-a-logic-app
 
 - id: 792
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question: |
     You have an Azure Storage account named storage1. You need to enable a user named User1 to list and regenerate storage account keys for storage1.
     Solution: You assign the Storage Account Encryption Scope Contributor Role to User1.
@@ -34,6 +38,8 @@
     Therefore, the proposed role does not meet the goal. See Microsoft’s documentation on managing storage account keys and Azure built-in roles.
 
 - id: 793
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Provision and manage containers in the Azure portal
   question: |
     You have an Azure container registry named Registry1 that contains an image named image1. You receive an error message when you attempt to deploy a container instance by using image1. You need to be able to deploy a container instance by using image1.
     Solution: You set Admin user to Enable for Registry1.
@@ -49,6 +55,8 @@
     Microsoft recommends managed identities or service principals for production scenarios; the admin account is a simple exam-friendly solution.
 
 - id: 794
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
   question: |
     You have an Azure virtual machine named VM1. VM1 was deployed by using a custom Azure Resource Manager template named ARM1.json. You receive a notification that VM1 will be affected by maintenance. You need to move VM1 to a different host immediately.
     Solution: From the resource group blade, move VM1 to another subscription.
@@ -69,6 +77,8 @@
     Be aware that data on temporary or ephemeral disks can be lost, and dynamic IP addresses may change. Microsoft: Redeploy an Azure VM to a new node
 
 - id: 795
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   question: |
     You have a Microsoft Entra tenant. You plan to create a group for each department at your company. You need to ensure that user and group permissions meet the following requirements:
     – When a new user is added to the tenant, the user is automatically added to their department’s group.
@@ -105,6 +115,8 @@
 
 
 - id: 796
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   question: |
     You have an Azure subscription that contains two users named User1 and User2. You need to enable self-service password reset (SSPR) for User1. The solution must ensure that SSPR is disabled for User2. What should you do first?
   choices: 
@@ -125,6 +137,8 @@
 
 
 - id: 797
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question: |
     You have an Azure subscription that contains a virtual machine named VM1 and two users named User1 and User2. You assign User1 the Contributor role for VM1. Which two actions can User1 perform on VM1? (Each correct answer presents a complete solution. Choose two.)
   choices:
@@ -150,6 +164,8 @@
     [Microsoft Learn: Azure Backup RBAC requirements](https://learn.microsoft.com/en-us/azure/backup/backup-rbac-rs-vault) and [Azure role definitions](https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles).
 
 - id: 798
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Azure subscriptions and governance
   question: |
     You have an Azure subscription. Your company has three external partners. You plan to deploy 10 virtual machines that will be used by the partners. You need to ensure that you can track the partners’ use of the virtual machines by using Microsoft Cost Management. The solution must minimize administrative effort. What should you do first?
 
@@ -175,6 +191,8 @@
 
 
 - id: 799
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question: |
     You have an Azure subscription. You plan to create a storage account named storage1. You need to configure a deny assignment for storage1. What should you use?
 
@@ -197,6 +215,8 @@
 
 
 - id: 800
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
   question: |
     You have an Azure subscription that contains three virtual machines named VM1, VM2, and VM3. All the virtual machines are in an availability set named AVSet1. You need to scale up VM1 to a new virtual machine size, but the intended size is unavailable. What should you do first?
 
@@ -221,6 +241,8 @@
 
 
 - id: 801
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure Azure App Service
   question: |
     You have a Standard Azure App Service plan named Plan1. You need to ensure that Plan1 will scale automatically when the CPU usage of the web app exceeds 80 percent. What should you select for Plan1?
 
@@ -249,6 +271,8 @@
 
 
 - id: 802
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Provision and manage containers in the Azure portal
   question: |
     You have an Azure subscription. You need to create an Azure container instance named cont1. The solution must meet the following requirements:
     – Ensure that specific configuration parameters are applied to cont1 during the container startup.
@@ -269,6 +293,8 @@
     - **D:** Encrypts data with customer-managed keys but does not pass startup configuration values.
 
 - id: 803
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
   question: |
     You plan to move a distributed on-premises app named App1 to an Azure subscription. After the planned move, App1 will be hosted on nine Azure virtual machines. You need to ensure that App1 always runs on at least eight virtual machines during planned Azure maintenance. What should you create?
   choices:
@@ -289,6 +315,8 @@
     [Microsoft Learn: Availability sets](https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview) | [Microsoft Learn: Planned maintenance](https://learn.microsoft.com/en-us/azure/virtual-machines/maintenance-notifications)
 
 - id: 804
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
   question: |
     You plan to automate the deployment of a virtual machine scale set that uses the Windows Server Datacenter image. You need to ensure that when the scale set virtual machines are provisioned, they have web server components installed. Which two actions should you perform? (Each correct answer presents part of the solution. Choose two.)
   choices:
@@ -318,6 +346,8 @@
     [Microsoft Learn: Create a Windows VM scale set with an ARM template](https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/quick-create-template-windows)
 
 - id: 805
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Provision and manage containers in the Azure portal
   question: |
     You have an Azure subscription. You create an Azure container registry and a container image. You need to push the container image to the container registry by using the Azure Command-Line Interface (CLI). You sign in to the container registry. Which action should you perform next?
   choices:
@@ -349,6 +379,8 @@
     [Microsoft Learn: Create an Azure container registry and push an image using the Azure CLI](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-get-started-azure-cli)
 
 - id: 806
+  skill: Implement and manage storage
+  sub-skill: Configure access to storage
   question: |
     You have an Azure subscription that contains a storage account named storage1. You need to allow access to storage1 from selected networks and your home office. The solution must minimize administrative effort. What should you do first for storage1?
   choices:
@@ -378,6 +410,8 @@
     [Microsoft Learn: Azure Storage firewall and network access rules](https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security)
 
 - id: 807
+  skill: Implement and manage virtual networking
+  sub-skill: Configure and manage virtual networks in Azure
   question: |
     You have an Azure subscription that contains two peered virtual networks named VNet1 and VNet2. VNet1 has a VPN gateway that uses static routing. The on-premises network has a VPN connection that uses the VPN gateway of VNet1. You need to configure access for users on the on-premises network to connect to a virtual machine on VNet2. The solution must minimize costs. Which type of connectivity should you use?
   choices:
@@ -406,6 +440,8 @@
     [Microsoft Learn: Azure Virtual Network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
 
 - id: 808
+  skill: Implement and manage virtual networking
+  sub-skill: Configure and manage virtual networks in Azure
   question: |
     You have an Azure subscription that contains two peered virtual networks named VNet1 and VNet2. You have a Network Virtual Appliance (NVA) named NetVA1. You need to ensure that the traffic from VNet1 to VNet2 is inspected by using NetVA1. What should you use?
   choices:
@@ -431,6 +467,8 @@
     [Microsoft Learn: Virtual network traffic routing](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview)
 
 - id: 809
+  skill: Monitor and maintain Azure resources
+  sub-skill: Monitor resources in Azure
   question: |
     You deploy Azure virtual machines to three Azure regions. Each region contains a virtual network. Each virtual network contains multiple subnets peered in a full mesh topology. Each subnet contains a network security group (NSG) that has defined rules. A user reports that he cannot use port 33000 to connect from a virtual machine in one region to a virtual machine in another region. Which two options can you use to diagnose the issue? (Each correct answer presents a complete solution. Choose two.)
   choices:
@@ -464,6 +502,8 @@
     [Microsoft Learn: Troubleshoot virtual network peering problems](https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-network/virtual-network-troubleshoot-peering-issues)
 
 - id: 810
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure Azure App Service
   question: |
     You have an Azure web app named webapp1. You have a virtual network named VNET1 and an Azure virtual machine named VM1 that hosts a MySQL database. VM1 connects to VNET1. You need to ensure that webapp1 can access the data hosted on VM1. What should you do?
   choices:
@@ -489,6 +529,8 @@
     [Microsoft Learn: Integrate your app with an Azure virtual network](https://learn.microsoft.com/en-us/azure/app-service/overview-vnet-integration)
 
 - id: 811
+  skill: Monitor and maintain Azure resources
+  sub-skill: Monitor resources in Azure
   question: |
     You have an Azure subscription that contains a virtual machine named VM1. You plan to deploy an Azure Monitor alert rule that will trigger an alert when CPU usage on VM1 exceeds 80 percent. You need to ensure that the alert rule sends an email message to two users named User1 and User2. What should you create for Azure Monitor?
   choices:

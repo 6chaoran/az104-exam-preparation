@@ -1,4 +1,6 @@
 - id: 741
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question: |
     You have an Azure Storage account named storage1. You need to enable a user named User1 to
     list and regenerate storage account keys for storage1.
@@ -26,6 +28,8 @@
 
     [Microsoft Learn: Azure built-in roles for Storage](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/storage#storage-account-key-operator-service-role)
 - id: 742
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Provision and manage containers in the Azure portal
   question: |
     You have an Azure container registry named Registry1 that contains an image named image1. You
     receive an error message when you attempt to deploy a container instance by using image1. You
@@ -56,6 +60,8 @@
 
     [Microsoft Learn: Deploy to Azure Container Instances from Azure Container Registry using a managed identity](https://learn.microsoft.com/en-us/azure/container-instances/using-azure-container-registry-mi)
 - id: 743
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
   question: |
     You have an Azure virtual machine named VM1. VM1 was deployed by using a custom Azure
     Resource Manager template named ARM1.json. You receive a notification that VM1 will be affected
@@ -83,6 +89,8 @@
 
     [Microsoft Learn: Redeploy a virtual machine to a new Azure node](https://learn.microsoft.com/en-us/troubleshoot/azure/virtual-machines/redeploy-to-new-node-linux)
 - id: 744
+  skill: Implement and manage virtual networking
+  sub-skill: Configure secure access to virtual networks
   question: |
     You have an app named App1 that is installed on two Azure virtual machines named VM1 and
     VM2. Connections to App1 are managed by using an Azure Load Balancer. The effective network
@@ -120,6 +128,8 @@
 
     [Microsoft Learn: Troubleshoot Azure Load Balancer health probe failures](https://learn.microsoft.com/en-us/troubleshoot/azure/load-balancer/troubleshoot-load-balancer-health-probe-failures)
 - id: 745
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   question: |
     You have a Microsoft Entra tenant. You plan to perform a bulk import of users. You need to ensure
     that imported user objects are added automatically as the members of a specific group based on
@@ -158,6 +168,8 @@
 
     [Microsoft Learn: Create or update a dynamic membership group](https://learn.microsoft.com/en-us/entra/identity/users/groups-create-rule)
 - id: 746
+  skill: Implement and manage storage
+  sub-skill: Configure access to storage
   question: |
     You have an Azure subscription that contains a storage account named storage1. You need to
     ensure that the access keys for storage1 rotate automatically. What should you configure?
@@ -187,6 +199,8 @@
 
     [Microsoft Learn: Automate rotation for resources with two sets of credentials](https://learn.microsoft.com/en-us/azure/key-vault/secrets/tutorial-rotation-dual)
 - id: 747
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   question: |
     You have a Microsoft Entra tenant named contoso.com. You collaborate with an external partner
     named fabrikam.com. You plan to invite users in fabrikam.com to the contoso.com tenant. You
@@ -213,6 +227,8 @@
 
     [Microsoft Learn: Allow or block invitations to B2B users from specific organizations](https://learn.microsoft.com/en-us/entra/external-id/allow-deny-list)
 - id: 748
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question: |
     You have an Azure subscription that contains a storage account named storage1. The storage1
     account contains blob data. You need to assign a role to a user named User1 to ensure that the
@@ -249,6 +265,8 @@
 
     [Microsoft Learn: Azure role-assignment condition format and syntax](https://learn.microsoft.com/en-us/azure/role-based-access-control/conditions-format)
 - id: 749
+  skill: Implement and manage storage
+  sub-skill: Configure access to storage
   question: |
     You have an Azure subscription that contains a storage account named storage1. The storage
     account contains a blob that stores images. Client access to storage1 is granted by using a shared
@@ -275,6 +293,8 @@
 
     [Microsoft Learn: Configure an expiration policy for shared access signatures](https://learn.microsoft.com/en-us/azure/storage/common/sas-expiration-policy)
 - id: 750
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Provision and manage containers in the Azure portal
   question: |
     You have an Azure subscription. You plan to create an Azure container registry named ContReg1.
     You need to ensure that you can push and pull signed images for ContReg1. What should you do
@@ -302,6 +322,8 @@
 
     [Microsoft Learn: Content trust in Azure Container Registry](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-content-trust)
 - id: 751
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
   question: |
     You plan to deploy several Azure virtual machines that will run Windows Server 2022 in a virtual
     machine scale set by using an Azure Resource Manager template. You need to ensure that NGINX
@@ -327,6 +349,8 @@
 
     [Microsoft Learn: Custom Script Extension for Windows](https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows)
 - id: 752
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Provision and manage containers in the Azure portal
   question: |
     You have an Azure subscription. You plan to deploy a container. You need to recommend which
     Azure services can scale the container automatically. What should you recommend?
@@ -354,6 +378,8 @@
 
     [Microsoft Learn: Automatic scaling in Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/manage-automatic-scaling)
 - id: 753
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure Azure App Service
   question: |
     You have a Standard Azure App Service plan named Plan1. You need to ensure that Plan1 will
     scale automatically when the CPU usage of the web app exceeds 80 percent. What should you
@@ -382,6 +408,8 @@
 
     [Microsoft Learn: Get started with autoscale in Azure](https://learn.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-get-started)
 - id: 754
+  skill: Implement and manage virtual networking
+  sub-skill: Configure and manage virtual networks in Azure
   question: |
     You have an Azure subscription. You create a routing table named RT1. You need to add a route
     to RT1 that specifies the next hop IP address. Which next hop type should you select?
@@ -410,6 +438,8 @@
 
     [Microsoft Learn: Virtual network traffic routing](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview)
 - id: 755
+  skill: Implement and manage virtual networking
+  sub-skill: Configure and manage virtual networks in Azure
   question: |
     You have an Azure virtual network named VNet1 that contains the following settings:
     - IPv4 address space: 172.16.10.0/24
@@ -442,6 +472,8 @@
 
     [Microsoft Learn: Azure virtual network FAQ](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq#are-there-any-restrictions-on-using-ip-addresses-within-these-subnets)
 - id: 756
+  skill: Implement and manage virtual networking
+  sub-skill: Configure and manage virtual networks in Azure
   question: |
     You have an Azure subscription that contains two peered virtual networks named VNet1 and VNet2.
     VNet1 has a VPN gateway that uses static routing. The on-premises network has a VPN connection
@@ -467,6 +499,8 @@
 
     [Microsoft Learn: Azure virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
 - id: 757
+  skill: Implement and manage virtual networking
+  sub-skill: Configure and manage virtual networks in Azure
   question: |
     You have an Azure subscription that contains two peered virtual networks named VNet1 and VNet2.
     You have a Network Virtual Appliance (NVA) named NetVA1. You need to ensure that the traffic

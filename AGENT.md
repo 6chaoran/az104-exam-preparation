@@ -36,7 +36,7 @@ When the user provides a question, use this structure unless they request a diff
    - Highlight plausible traps, especially options that are real Azure features but solve a different problem.
 
 5. **AZ-104 exam focus**
-   - Name the relevant AZ-104 skill area and the facts worth remembering.
+   - Name the relevant AZ-104 skill and sub-skill from `skill_category.md`, and the facts worth remembering.
    - Emphasize distinctions commonly tested by Microsoft, such as control plane versus data plane, authentication versus authorization, RBAC role versus scope, availability versus backup, and service limits versus configuration choices.
    - Include a short memory aid or rule of thumb when useful.
 
@@ -122,9 +122,13 @@ Azure features, portal labels, role definitions, licensing, limits, and the AZ-1
 
 ## Question-bank maintenance
 
-If asked to edit questions in `past_questions/*.yaml`:
+If asked to add or edit questions in `past_questions/*.yaml`:
 
 - Preserve valid YAML and the existing fields unless a schema change is requested.
+- Every new question must include `skill` and `sub-skill` as top-level string fields alongside `id`, `question`, and `answer`. Use the exact category names in `skill_category.md`; omit percentage ranges from `skill`.
+- Choose a `sub-skill` that belongs to the selected `skill`. Classify by the main concept needed to answer the question, not merely a service mentioned in the scenario.
+- If a question spans several categories, record the primary skill and sub-skill in these fields and keep additional topics in `tags`. Existing tags do not replace the required category fields.
+- When editing an existing question, add missing category fields when its classification is clear. Do not invent new categories; flag a taxonomy gap if none fits.
 - Keep answer formats consistent with the question: for example, `A` for one answer and `DE` for two answers if that is the repository convention.
 - Write explanations that remain understandable without opening the links.
 - Prefer current `learn.microsoft.com` links.
@@ -135,9 +139,11 @@ If asked to edit questions in `past_questions/*.yaml`:
 - Add `learning_note` when the attempt reveals a specific misconception or useful distinction. Keep it factual and suitable for later knowledge-gap summaries.
 - Keep `answer` reserved for the verified correct answer; never replace it with the learner's attempted answer.
 
-Example attempt fields:
+Example category and attempt fields:
 
 ```yaml
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
   answer: BC
   user_answer: AC
   user_result: partially_correct

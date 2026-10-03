@@ -1,4 +1,6 @@
 - id: 681
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   question: |
     You have an Azure Active Directory (Azure AD) tenant named contoso.com. You have a CSV file
     that contains the names and email addresses of 500 external users. You need to create a guest
@@ -33,6 +35,8 @@
     [Microsoft Learn: Add a guest user with Microsoft Graph PowerShell](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell)
 
 - id: 682
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question: |
     You have an Azure subscription named Subscription1 that contains a virtual network named VNet1.
     VNet1 is in a resource group named RG1. A user named User1 has the following roles for

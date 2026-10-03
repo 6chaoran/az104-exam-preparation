@@ -1,4 +1,6 @@
 - id: '001'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question: |
     HOTSPOT
 
@@ -86,6 +88,8 @@
 
     [Microsoft Learn: Enable Microsoft Entra ID authentication for AKS](https://learn.microsoft.com/en-us/azure/aks/enable-authentication-microsoft-entra-id)
 - id: '003'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   question: |
     You have a Microsoft 365 tenant and an Azure Active Directory (Azure AD) tenant named contoso.com.
 
@@ -174,6 +178,8 @@
     [Microsoft Learn: Create an access review of groups and applications](https://learn.microsoft.com/en-us/entra/id-governance/create-access-review)
     [Microsoft Graph: Configure access review scope](https://learn.microsoft.com/en-us/graph/accessreviews-scope-concept)
 - id: '005'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Azure subscriptions and governance
   question_type: hotspot
   question: |
     You have the Azure management groups shown in the following table:
@@ -237,6 +243,8 @@
     [Microsoft Learn: Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
     [Microsoft Learn: Manage management groups](https://learn.microsoft.com/en-us/azure/governance/management-groups/manage)
 - id: '006'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Azure subscriptions and governance
   question_type: hotspot
   question: |
     You have an Azure policy assignment with the following settings:
@@ -268,6 +276,8 @@
 
     [Microsoft Learn: Understand scope in Azure Policy](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/scope)
 - id: '007'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Azure subscriptions and governance
   question_type: hotspot
   question: |
     You have an Azure subscription that contains the resources shown in the following table:
@@ -323,6 +333,8 @@
     [Microsoft Learn: Policy definitions for tagging resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies)
     [Microsoft Learn: Use tags to organize Azure resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources)
 - id: '008'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Azure subscriptions and governance
   question_type: hotspot
   question: |
     You have an Azure subscription named AZPT1 that contains the resources shown in the following table:
@@ -366,6 +378,8 @@
     [Microsoft Learn: Move Recovery Services vaults](https://learn.microsoft.com/en-us/azure/backup/backup-azure-move-recovery-services-vault)
     [Microsoft Learn: Site Recovery support matrix](https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-support-matrix)
 - id: '009'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Azure subscriptions and governance
   question: |
     You recently created a new Azure subscription that contains a user named Admin1.
 
@@ -398,6 +412,8 @@
 
     [Microsoft Learn: Set-AzMarketplaceTerms](https://learn.microsoft.com/en-us/powershell/module/az.marketplaceordering/set-azmarketplaceterms)
 - id: '010'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - old question
   question: |
@@ -457,6 +473,8 @@
 
     [Microsoft Learn: Conditional Access grant controls](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-grant)
 - id: '012'
+  skill: Monitor and maintain Azure resources
+  sub-skill: Monitor resources in Azure
   tags:
     - old question
     - low priority
@@ -533,6 +551,8 @@
 
     [Microsoft Learn: Manage the Microsoft Entra joined device local administrator role](https://learn.microsoft.com/en-us/entra/identity/devices/assign-local-admin)
 - id: '014'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Microsoft Entra groups and devices
@@ -595,6 +615,8 @@
     [Microsoft Learn: Microsoft Entra group membership types](https://learn.microsoft.com/en-us/entra/fundamentals/concept-learn-about-groups#group-membership)
     [Microsoft Learn: Microsoft Entra built-in roles](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference)
 - id: '015'
+  skill: Monitor and maintain Azure resources
+  sub-skill: Implement backup and recovery
   tags:
     - "exam topic: Monitor and maintain Azure resources"
     - Implement backup and recovery
@@ -642,6 +664,8 @@
 
     [Microsoft Learn: Delete an Azure Backup Recovery Services vault](https://learn.microsoft.com/en-us/azure/backup/backup-azure-delete-vault)
 - id: '016'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Manage access to Azure resources
@@ -685,6 +709,8 @@
 
     [Microsoft Learn: Azure built-in roles for Privileged](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/privileged)
 - id: '017'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Manage Microsoft Entra custom domains
@@ -728,6 +754,8 @@
 
     [Microsoft Learn: Add your custom domain name using the Microsoft Entra admin center](https://learn.microsoft.com/en-us/entra/fundamentals/add-custom-domain)
 - id: '018'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Manage access to Azure resources
@@ -767,6 +795,8 @@
 
     [Microsoft Learn: Azure built-in roles for Integration](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/integration)
 - id: '019'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Manage access to Azure resources
@@ -806,6 +836,8 @@
 
     [Microsoft Learn: Azure built-in roles for Integration](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/integration)
 - id: '020'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Manage access to Azure resources
@@ -845,6 +877,8 @@
     [Microsoft Learn: Azure built-in roles for Privileged](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/privileged)
     [Microsoft Learn: Steps to assign an Azure role](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-steps)
 - id: '021'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Azure subscriptions and governance
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Manage costs by using tags
@@ -894,6 +928,8 @@
     [Microsoft Learn: Use tags to organize Azure resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/resource-group-using-tags)
     [Microsoft Learn: Customize views in Cost analysis](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/customize-cost-analysis-views)
 - id: '022'
+  skill: Monitor and maintain Azure resources
+  sub-skill: Monitor resources in Azure
   tags:
     - "exam topic: Monitor and maintain Azure resources"
     - Monitor resources by using Azure Monitor
@@ -932,6 +968,8 @@
     [Microsoft Learn: KQL search operator](https://learn.microsoft.com/en-us/kusto/query/search-operator?view=microsoft-fabric)
     [Microsoft Learn: Event table](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/event)
 - id: '023'
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
   tags:
     - "exam topic: Deploy and manage Azure compute resources"
     - Availability zones
@@ -989,6 +1027,8 @@
     [Microsoft Learn: Reliability in Azure Virtual Network](https://learn.microsoft.com/en-us/azure/reliability/reliability-virtual-network)
     [Microsoft Learn: Azure Virtual Network FAQ](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq)
 - id: '024'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Azure subscriptions and governance
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Manage resource groups
@@ -1031,6 +1071,8 @@
     [Microsoft Learn: Move App Service resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-limitations/app-service-move-limitations)
     [Microsoft Learn: Azure Policy applicability](https://learn.microsoft.com/en-us/azure/governance/policy/concepts/policy-applicability)
 - id: '025'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Manage access to Azure resources
@@ -1093,6 +1135,8 @@
     [Microsoft Learn: Understand Azure role definitions](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions)
     [Microsoft Learn: Azure custom roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles)
 - id: '026'
+  skill: Implement and manage virtual networking
+  sub-skill: Configure name resolution and load balancing
   tags:
     - "exam topic: Implement and manage virtual networking"
     - Load balancing
@@ -1141,6 +1185,8 @@
     [Microsoft Learn: Application Gateway frontend IP addresses](https://learn.microsoft.com/en-us/azure/application-gateway/configuration-frontend-ip)
     [Microsoft Learn: Traffic Manager FAQ](https://learn.microsoft.com/en-us/azure/traffic-manager/traffic-manager-faqs)
 - id: '027'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Azure subscriptions and governance
   tags:
     - "exam topic: Monitor and maintain Azure resources"
     - Azure Advisor
@@ -1178,6 +1224,8 @@
 
     [Microsoft Learn: Azure Advisor VM cost recommendations](https://learn.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations)
 - id: '029'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Microsoft Entra ID
@@ -1223,6 +1271,8 @@
     [Microsoft Learn: Configure external collaboration settings](https://learn.microsoft.com/en-us/entra/external-id/external-collaboration-settings-configure)
     [Microsoft Learn: Use Microsoft accounts for B2B collaboration](https://learn.microsoft.com/en-us/entra/external-id/microsoft-account)
 - id: '030'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Management groups
@@ -1261,6 +1311,8 @@
     [Microsoft Learn: Elevate access for a Global Administrator](https://learn.microsoft.com/en-us/azure/role-based-access-control/elevate-access-global-admin)
     [Microsoft Learn: Organize resources with management groups](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview)
 - id: '031'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Microsoft Entra groups
@@ -1320,6 +1372,8 @@
 
     [Microsoft Learn: Manage dynamic membership rules](https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-membership)
 - id: '032'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   question_type: hotspot
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -1380,6 +1434,8 @@
 
     [Microsoft Learn: Manage user profile information](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info)
 - id: '033'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure RBAC
@@ -1428,6 +1484,8 @@
 
     [Microsoft Learn: Azure RBAC permissions for Network Watcher](https://learn.microsoft.com/en-us/azure/network-watcher/rbac-permissions)
 - id: '034'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure RBAC
@@ -1471,6 +1529,8 @@
 
     [Microsoft Learn: Azure RBAC permissions for Network Watcher](https://learn.microsoft.com/en-us/azure/network-watcher/rbac-permissions)
 - id: '035'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure RBAC
@@ -1514,6 +1574,8 @@
 
     [Microsoft Learn: Azure RBAC permissions for Network Watcher](https://learn.microsoft.com/en-us/azure/network-watcher/rbac-permissions)
 - id: '036'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure RBAC
@@ -1557,6 +1619,8 @@
     [Microsoft Learn: Azure roles and Microsoft Entra roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles)
     [Microsoft Learn: Azure built-in roles for compute](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/compute)
 - id: '038'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Managed identities
@@ -1604,6 +1668,8 @@
     [Microsoft Learn: Configure managed identities on Azure virtual machines](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-to-configure-managed-identities)
     [Microsoft Learn: Use a VM managed identity to access Azure Resource Manager](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/tutorial-windows-vm-access)
 - id: '037'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question_type: hotspot
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -1668,6 +1734,8 @@
     [Microsoft Learn: Elevate access to manage Azure subscriptions and management groups](https://learn.microsoft.com/en-us/azure/role-based-access-control/elevate-access-global-admin)
     [Microsoft Learn: Azure roles and Microsoft Entra roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles)
 - id: '039'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Azure subscriptions and governance
   tags:
     - "exam topic: Manage Azure identities and governance"
     - must-review
@@ -1723,6 +1791,8 @@
     [Microsoft Learn: Delete an Azure Backup Recovery Services vault](https://learn.microsoft.com/en-us/azure/backup/backup-azure-delete-vault)
     [Microsoft Learn: Lock Azure resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources)
 - id: '040'
+  skill: Implement and manage virtual networking
+  sub-skill: Configure name resolution and load balancing
   tags:
     - "exam topic: Implement and manage virtual networking"
     - Azure DNS
@@ -1761,6 +1831,8 @@
     [Microsoft Learn: Delegate an Azure DNS subdomain](https://learn.microsoft.com/en-us/azure/dns/delegate-subdomain)
     [Microsoft Learn: Azure DNS delegation overview](https://learn.microsoft.com/en-us/azure/dns/dns-domain-delegation)
 - id: '041'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Microsoft Entra ID
@@ -1817,6 +1889,8 @@
 
     [Microsoft Learn: Add your custom domain name to Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/fundamentals/add-custom-domain)
 - id: '042'
+  skill: Monitor and maintain Azure resources
+  sub-skill: Monitor resources in Azure
   tags:
     - "exam topic: Monitor and maintain Azure resources"
     - Log Analytics
@@ -1859,6 +1933,8 @@
     [Microsoft Learn: Get started with log queries in Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/get-started-queries)
     [Microsoft Learn: Event table reference](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/event)
 - id: '043'
+  skill: Implement and manage virtual networking
+  sub-skill: Configure name resolution and load balancing
   tags:
     - "exam topic: Implement and manage virtual networking"
     - Azure DNS
@@ -1906,6 +1982,8 @@
     [Microsoft Learn: Host your domain in Azure DNS](https://learn.microsoft.com/en-us/azure/dns/dns-delegate-domain-azure-dns)
     [Microsoft Learn: Azure DNS delegation overview](https://learn.microsoft.com/en-us/azure/dns/dns-domain-delegation)
 - id: '044'
+  skill: Implement and manage storage
+  sub-skill: Configure access to storage
   question_type: hotspot
   tags:
     - "exam topic: Implement and manage storage"
@@ -1978,6 +2056,8 @@
     [Microsoft Learn: Assign share-level permissions for Azure Files](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-identity-assign-share-level-permissions)
     [Microsoft Learn: Azure Files identity-based authentication overview](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview)
 - id: '045'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question_type: hotspot
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -2042,6 +2122,8 @@
     [Microsoft Learn: Azure built-in privileged roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/privileged)
     [Microsoft Learn: Azure built-in security roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/security)
 - id: '046'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Azure subscriptions and governance
   question_type: hotspot
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -2099,6 +2181,8 @@
     [Microsoft Learn: Lock Azure resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources)
     [Microsoft Learn: Use tags to organize Azure resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources)
 - id: '047'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Microsoft Entra ID
@@ -2142,6 +2226,8 @@
 
     [Microsoft Learn: Bulk delete users in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/users/users-bulk-delete)
 - id: '048'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Azure subscriptions and governance
   question_type: hotspot
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -2221,6 +2307,8 @@
     [Microsoft Learn: Policy definitions for tag compliance](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies)
     [Microsoft Learn: Use tags to organize Azure resources](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources)
 - id: '049'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Monitor and maintain Azure resources"
     - Azure RBAC
@@ -2275,6 +2363,8 @@
 
     [Microsoft Learn: Azure RBAC permissions for Network Watcher](https://learn.microsoft.com/en-us/azure/network-watcher/rbac-permissions)
 - id: '050'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Microsoft Entra ID
@@ -2319,6 +2409,8 @@
 
     [Microsoft Learn: Administrative units in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/administrative-units)
 - id: '051'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure RBAC
@@ -2368,6 +2460,8 @@
 
     [Microsoft Learn: Azure built-in roles for Integration](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/integration)
 - id: '052'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question_type: hotspot
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -2424,6 +2518,8 @@
     [Microsoft Learn: Steps to assign an Azure role](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-steps)
     [Microsoft Learn: Azure built-in compute roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/compute)
 - id: '053'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure RBAC
@@ -2473,6 +2569,8 @@
     [Microsoft Learn: Steps to assign an Azure role](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-steps)
     [Microsoft Learn: Azure built-in privileged roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/privileged)
 - id: '054'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question_type: hotspot
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -2533,6 +2631,8 @@
     [Microsoft Learn: Azure role definitions](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions)
     [Microsoft Learn: Azure custom roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles)
 - id: '055'
+  skill: Implement and manage storage
+  sub-skill: Configure access to storage
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure Files
@@ -2580,6 +2680,8 @@
     [Microsoft Learn: Enable AD DS authentication for Azure Files](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-identity-ad-ds-enable)
     [Microsoft Learn: Assign share-level permissions for Azure Files](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-identity-assign-share-level-permissions)
 - id: '056'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure RBAC
@@ -2630,6 +2732,8 @@
     [Microsoft Learn: Organize resources with management groups](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview)
     [Microsoft Learn: Azure built-in privileged roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/privileged)
 - id: '057'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Azure subscriptions and governance
   question_type: hotspot
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -2688,6 +2792,8 @@
     [Microsoft Learn: Azure Policy overview](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
     [Microsoft Learn: Build policies to enforce compliance](https://learn.microsoft.com/en-us/azure/governance/policy/tutorials/create-and-manage)
 - id: '058'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Microsoft Entra ID
@@ -2743,6 +2849,8 @@
     [Microsoft Learn: Azure roles and Microsoft Entra roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles)
     [Microsoft Learn: Access and create a new tenant](https://learn.microsoft.com/en-us/entra/fundamentals/sign-up-organization)
 - id: '059'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Microsoft Entra ID
@@ -2796,6 +2904,8 @@
     [Microsoft Learn: Azure roles and Microsoft Entra roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles)
     [Microsoft Learn: Access and create a new tenant](https://learn.microsoft.com/en-us/entra/fundamentals/sign-up-organization)
 - id: '060'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Microsoft Entra ID
@@ -2848,6 +2958,8 @@
     [Microsoft Learn: Azure roles and Microsoft Entra roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles)
     [Microsoft Learn: Access and create a new tenant](https://learn.microsoft.com/en-us/entra/fundamentals/sign-up-organization)
 - id: '061'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure RBAC
@@ -2894,6 +3006,8 @@
     [Microsoft Learn: Understand Azure role definitions](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions#assignablescopes)
     [Microsoft Learn: Azure custom roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles)
 - id: '062'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question_type: multiple_select
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -2944,6 +3058,8 @@
     [Microsoft Learn: Storage Blob Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/storage#storage-blob-data-contributor)
     [Microsoft Learn: Control and data actions](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions#control-and-data-actions)
 - id: '063'
+  skill: Monitor and maintain Azure resources
+  sub-skill: Monitor resources in Azure
   tags:
     - "exam topic: Monitor and maintain Azure resources"
     - Azure Monitor
@@ -2980,6 +3096,8 @@
 
     [Microsoft Learn: KQL search operator](https://learn.microsoft.com/en-us/kusto/query/search-operator)
 - id: '064'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Deploy and manage Azure compute resources"
     - Azure App Service
@@ -3021,6 +3139,8 @@
 
     [Microsoft Learn: Manage App Service deployment credentials](https://learn.microsoft.com/en-us/azure/app-service/deploy-configure-credentials)
 - id: '065'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Microsoft Entra ID
@@ -3064,6 +3184,8 @@
 
     [Microsoft Learn: Bulk invite B2B collaboration users](https://learn.microsoft.com/en-us/entra/external-id/tutorial-bulk-invite)
 - id: '066'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question_type: hotspot
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -3125,6 +3247,8 @@
     [Microsoft Learn: Create or update Azure custom roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles-portal)
     [Microsoft Learn: Create a custom role in Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/custom-create)
 - id: '067'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question_type: drag_drop
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -3177,6 +3301,8 @@
     [Microsoft Learn: Azure built-in roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
     [Microsoft Learn: Authorize access to Azure Storage management resources](https://learn.microsoft.com/en-us/azure/storage/common/authorization-resource-provider)
 - id: '068'
+  skill: Implement and manage virtual networking
+  sub-skill: Configure secure access to virtual networks
   tags:
     - "exam topic: Implement and manage virtual networking"
     - Network security groups
@@ -3223,6 +3349,8 @@
 
     [Microsoft Learn: Azure service tags](https://learn.microsoft.com/en-us/azure/virtual-network/service-tags-overview)
 - id: '069'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Microsoft Entra ID
@@ -3341,6 +3469,8 @@
     [Microsoft Learn: Access-package resource roles](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-access-package-resources)
     [Microsoft Learn: Govern external users](https://learn.microsoft.com/en-us/entra/id-governance/entitlement-management-external-users)
 - id: '071'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure RBAC
@@ -3382,6 +3512,8 @@
 
     [Microsoft Learn: Steps to assign an Azure role](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-steps)
 - id: '072'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question_type: hotspot
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -3448,6 +3580,8 @@
     [Microsoft Learn: Role-assignable group restrictions](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/groups-concept)
     [Microsoft Learn: Azure role assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments)
 - id: '073'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure RBAC
@@ -3490,6 +3624,8 @@
 
     [Microsoft Learn: Steps to assign an Azure role](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-steps)
 - id: '074'
+  skill: Implement and manage virtual networking
+  sub-skill: Configure secure access to virtual networks
   tags:
     - "exam topic: Implement and manage virtual networking"
     - Azure Private Link
@@ -3542,6 +3678,8 @@
 
     [Microsoft Learn: Use private endpoints for Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints)
 - id: '075'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question_type: hotspot
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -3616,6 +3754,8 @@
     [Microsoft Learn: Understand Azure role assignments](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments)
     [Microsoft Learn: Storage Account Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/storage#storage-account-contributor)
 - id: '076'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure RBAC
@@ -3668,6 +3808,8 @@
     [Microsoft Learn: User Access Administrator](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/privileged#user-access-administrator)
     [Microsoft Learn: Steps to assign an Azure role](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-steps)
 - id: '077'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   question_type: hotspot
   tags:
     - "exam topic: Manage Azure identities and governance"
@@ -3742,6 +3884,8 @@
     [Microsoft Learn: User Access Administrator](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/privileged#user-access-administrator)
     [Microsoft Learn: Virtual Machine Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/compute#virtual-machine-contributor)
 - id: '078'
+  skill: Implement and manage storage
+  sub-skill: Configure access to storage
   tags:
     - "exam topic: Implement and manage storage"
     - Azure Files
@@ -3795,6 +3939,8 @@
     [Microsoft Learn: Assign share-level permissions for Azure Files](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-identity-assign-share-level-permissions)
     [Microsoft Learn: Azure Files identity-based authentication](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-active-directory-overview)
 - id: '080'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   question_type: hotspot
   tags:
     - must-review
@@ -3878,6 +4024,8 @@
     [Microsoft Learn: Group-based licensing](https://learn.microsoft.com/en-us/entra/identity/users/licensing-group-advanced)
     [Microsoft Learn: Licensing PowerShell examples](https://learn.microsoft.com/en-us/entra/identity/users/licensing-powershell-graph-examples)
 - id: '081'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   question_type: hotspot
   tags:
     - must-review
@@ -3946,6 +4094,8 @@
     [Microsoft Learn: Manage user profile information](https://learn.microsoft.com/en-us/entra/fundamentals/how-to-manage-user-profile-info)
     [Microsoft Learn: Update a user](https://learn.microsoft.com/en-us/graph/api/user-update?view=graph-rest-1.0)
 - id: '082'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Microsoft Entra B2B
@@ -4001,6 +4151,8 @@
     [Microsoft Learn: Add a guest user with PowerShell](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell)
     [Microsoft Learn: New-MgInvitation](https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.identity.signins/new-mginvitation?view=graph-powershell-1.0)
 - id: '083'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Microsoft Entra B2B
@@ -4056,6 +4208,8 @@
     [Microsoft Learn: Add a guest user with PowerShell](https://learn.microsoft.com/en-us/entra/external-id/b2b-quickstart-invite-powershell)
     [Microsoft Learn: New-MgInvitation](https://learn.microsoft.com/en-us/powershell/module/microsoft.graph.identity.signins/new-mginvitation?view=graph-powershell-1.0)
 - id: '088'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure RBAC
@@ -4114,6 +4268,8 @@
     [Microsoft Learn: Storage Blob Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/storage#storage-blob-data-contributor)
     [Microsoft Learn: Assign an Azure role for access to blob data](https://learn.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access)
 - id: '090'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - must-review
@@ -4179,6 +4335,8 @@
     [Microsoft Learn: Group-based licensing and group types](https://learn.microsoft.com/en-us/graph/api/resources/groups-overview#group-based-licensing)
     [Microsoft Support: Create a group in the Exchange admin center](https://support.microsoft.com/en-us/servicing/exchange/online/use-a-screen-reader-to-create-a-new-distribution-group-in-the-exchange-admin-center)
 - id: '092'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Default user permissions
@@ -4269,6 +4427,8 @@
     [Microsoft Learn: Default user permissions](https://learn.microsoft.com/en-us/entra/fundamentals/users-default-permissions)
     [Microsoft Learn: Register an app and create a service principal](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal)
 - id: '093'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage access to Azure resources
   tags:
     - "exam topic: Manage Azure identities and governance"
     - Azure RBAC
@@ -4389,6 +4549,8 @@
     [Microsoft Learn: Azure role assignment condition format and syntax](https://learn.microsoft.com/en-us/azure/role-based-access-control/conditions-format)
     [Microsoft Learn: Azure built-in roles for Storage](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/storage)
 - id: '095'
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
   tags:
     - "exam topic: Manage Azure identities and governance"
     - ARM templates
@@ -4519,6 +4681,8 @@
     [Microsoft Learn: Array last](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-array#last)
     [Microsoft Learn: Subscription deployment location](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-subscription#deployment-location-and-name)
 - id: '096'
+  skill: Implement and manage virtual networking
+  sub-skill: Configure secure access to virtual networks
   tags:
     - "exam topic: Implement and manage virtual networking"
     - Private endpoints
@@ -4592,3 +4756,148 @@
 
     [Microsoft Learn: Use private endpoints for Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints)
     [Microsoft Learn: Virtual network service endpoints](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview)
+- id: '100'
+  skill: Manage Azure identities and governance
+  sub-skill: Manage Microsoft Entra users and groups
+  tags:
+    - "exam topic: Manage Azure identities and governance"
+    - Microsoft Entra ID
+    - Users and groups
+    - Group-based licensing
+    - must-review
+  question: |
+    HOTSPOT
+
+    You have a Microsoft Entra tenant that contains the following groups.
+
+    | Name | Type | Has an assigned license |
+    |------|------|-------------------------|
+    | Group1 | Security | Yes |
+    | Group2 | Security | No |
+    | Group3 | Microsoft 365 | Yes |
+    | Group4 | Microsoft 365 | No |
+
+    The tenant contains the following users.
+
+    | Name | Member of | Has a directly assigned license |
+    |------|-----------|---------------------------------|
+    | User1 | None | Yes |
+    | User2 | Group1 | No |
+    | User3 | Group4 | Yes |
+    | User4 | None | No |
+
+    Which users and groups can you delete? Select the appropriate options in the
+    answer area. Each correct selection is worth one point.
+  choices:
+    Users:
+      - User4 only
+      - User1 and User4 only
+      - User2 and User4 only
+      - User1, User2, User3, and User4
+    Groups:
+      - Group2 only
+      - Group2 and Group3 only
+      - Group2 and Group4 only
+      - Group1, Group2, Group3, and Group4
+  answer:
+    Users: User1, User2, User3, and User4
+    Groups: Group2 and Group4 only
+  user_answer:
+    Users: User1, User2, User3, and User4
+    Groups: Group1, Group2, Group3, and Group4
+  user_result: partially_correct
+  user_reasoning: Selected all users and all groups; no further reasoning was provided.
+  learning_note: |
+    A directly assigned or inherited license does not prevent deleting a user.
+    A group with assigned licenses requires those licenses to be removed before
+    deletion. This applies to both security and Microsoft 365 groups.
+  explanation: |
+    Correct answers: **All users; Group2 and Group4 only.**
+
+    **Users:** User1 and User3 have directly assigned licenses. User2 inherits a
+    license from Group1. User4 has no license. None of these licensing states
+    prevents deleting the user, so all four users can be deleted.
+
+    **Groups:** Group1 and Group3 have licenses assigned. Remove their license
+    assignments before deleting them. Group2 and Group4 have no assigned licenses
+    and can be deleted as shown. Security versus Microsoft 365 group type does
+    not change the licensing restriction.
+
+    The question asks which objects can be deleted in their current state; do not
+    assume an extra step to remove the groups' licenses first. User membership
+    does not itself block deleting either the user or an unlicensed group.
+
+    The learner's users selection was correct; the groups selection overlooked
+    the requirement to remove assigned licenses before group deletion.
+
+    This remains a relevant licensing distinction in Microsoft documentation,
+    unlike the retired classic co-administrator role in the preceding question.
+
+    Remember: Licensed user → can delete. Licensed group → remove licenses first.
+
+    [Microsoft Learn: Assign or unassign user licenses](https://learn.microsoft.com/en-us/microsoft-365/admin/manage/remove-licenses-from-users?view=o365-worldwide)
+    [Microsoft Learn: Troubleshoot group deletion](https://learn.microsoft.com/en-us/troubleshoot/entra/entra-id/dir-dmns-obj/troubleshoot-dynamic-groups#troubleshoot-dynamic-groups-deletion-or-restoration)
+- id: '101'
+  skill: Implement and manage virtual networking
+  sub-skill: Configure secure access to virtual networks
+  tags:
+    - "exam topic: Implement and manage virtual networking"
+    - Private endpoints
+    - Azure Private Link
+    - Azure Storage
+  question: |
+    You have an Azure subscription that contains the following resources.
+
+    | Name | Type | Location |
+    |------|------|----------|
+    | VM1 | Virtual machine | East US |
+    | storage1 | Storage account | West US |
+
+    You need to ensure that data transfers between storage1 and VM1 do NOT
+    traverse the internet.
+
+    What should you configure for storage1?
+  choices:
+    A: data protection
+    B: a private endpoint
+    C: Public network access in the Firewalls and virtual networks settings
+    D: a shared access signature (SAS)
+  answer: B
+  user_answer: B
+  user_result: correct
+  user_reasoning: Selected a private endpoint; no further reasoning was provided.
+  learning_note: |
+    A private endpoint gives a storage service a private IP in a virtual network.
+    Traffic uses Azure Private Link over the Microsoft backbone. The storage
+    account can be in a different region from the virtual network and endpoint.
+    Configure DNS so the storage hostname resolves to the private endpoint IP.
+  explanation: |
+    **B — a private endpoint** is correct.
+
+    Create a private endpoint for the required storage1 service, such as Blob or
+    File, in VM1's virtual network. The endpoint uses a private IP address, and
+    Azure Private Link carries traffic to storage1 over the Microsoft backbone,
+    avoiding the public internet.
+
+    The regions do not prevent this solution. The private endpoint and virtual
+    network can be in East US while the storage account remains in West US.
+    Private Link supports connecting to a service in another region.
+
+    Configure DNS so VM1 resolves the storage service hostname to the private
+    endpoint IP. Applications can keep their normal storage connection strings.
+    Creating a private endpoint does not automatically disable public access to
+    the storage account; public network access can be disabled separately if needed.
+
+    **Why the other options are wrong:**
+
+    - **A:** Data protection features help protect or recover data. They do not
+      provide private network connectivity.
+    - **C:** Public network access controls access through the public endpoint.
+      That setting alone does not create a private connection from VM1.
+    - **D:** A shared access signature grants scoped, time-limited access to
+      storage data. It controls authorization, not the network path.
+
+    Remember: Private endpoint = private IP + Private Link + Microsoft backbone.
+
+    [Microsoft Learn: Use private endpoints for Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-private-endpoints)
+    [Microsoft Learn: Private endpoint regional requirements](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
