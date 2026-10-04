@@ -125,10 +125,13 @@ Azure features, portal labels, role definitions, licensing, limits, and the AZ-1
 If asked to add or edit questions in `past_questions/*.yaml`:
 
 - Preserve valid YAML and the existing fields unless a schema change is requested.
-- Every new question must include `skill` and `sub-skill` as top-level string fields alongside `id`, `question`, and `answer`. Use the exact category names in `skill_category.md`; omit percentage ranges from `skill`.
+- When adding a question that includes screenshots, make every effort to convert their content into faithful text or Markdown within the existing question and choice fields. Transcribe visible wording, labels, values, settings, and answer choices; use Markdown tables, lists, or code blocks where they best preserve the screenshot's structure. Describe relevant visual relationships when they cannot be represented directly in text. Preserve all details needed to answer the question, including option labels and ordering. Flag unreadable or ambiguous content rather than inventing it; retain a reference to the original screenshot when available if essential visual details cannot be faithfully converted.
+- Correct obvious spelling errors caused by PDF copy-and-paste dropping letters, such as `le` → `file` and `conguration` → `configuration`, throughout the question and options. Use context to confirm the intended word, preserve the question's meaning, and flag ambiguous text rather than guessing.
+- Every question added or edited must have populated `skill` and `sub-skill` as top-level string fields alongside `id`, `question`, and `answer`. Use the exact category names in `skill_category.md`; omit percentage ranges from `skill`.
 - Choose a `sub-skill` that belongs to the selected `skill`. Classify by the main concept needed to answer the question, not merely a service mentioned in the scenario.
-- If a question spans several categories, record the primary skill and sub-skill in these fields and keep additional topics in `tags`. Existing tags do not replace the required category fields.
-- When editing an existing question, add missing category fields when its classification is clear. Do not invent new categories; flag a taxonomy gap if none fits.
+- If a question spans several categories, record the primary skill and sub-skill in these fields. Do not add topic tags; tags do not replace the required category fields.
+- The only allowed tags are `must-review` and `skip-review`. Do not introduce any other tags; remove unsupported tags from questions being added or edited.
+- When editing an existing question, populate missing or empty category fields. Do not invent new categories; flag a taxonomy gap if none fits.
 - Keep answer formats consistent with the question: for example, `A` for one answer and `DE` for two answers if that is the repository convention.
 - Write explanations that remain understandable without opening the links.
 - Prefer current `learn.microsoft.com` links.
