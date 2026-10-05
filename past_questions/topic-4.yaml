@@ -3879,7 +3879,7 @@
     HOTSPOT
 
     You have an Azure subscription.
-
+  
     You plan to use Azure Resource Manager templates to deploy 50 Azure virtual
     machines that will be part of the same availability set.
 
