@@ -1,0 +1,1481 @@
+- id: 1
+  title: Contoso, Ltd.
+  description: |
+    Introductory Info
+
+    Overview
+
+    Contoso, Ltd. is a manufacturing company that has offices worldwide.
+    Contoso works with partner organizations to bring products to market.
+    Contoso products are manufactured by using blueprint files that the
+    company authors and maintains.
+
+    Existing Environment
+
+    Currently, Contoso uses multiple types of servers for business operations:
+    - File servers
+    - Domain controllers
+    - Microsoft SQL Server servers
+
+    Your network contains an Active Directory forest named contoso.com.
+    All servers and client computers are joined to Active Directory.
+
+    You have a public-facing application named App1. App1 comprises three tiers:
+    - A SQL database
+    - A web front end
+    - A processing middle tier
+
+    Each tier comprises five virtual machines. Users access the web front end
+    by using HTTPS only.
+
+    The source text references Attachment.tiff for the application tiers,
+    but that diagram was not supplied. No additional topology is assumed.
+
+    Requirements
+
+    Planned Changes
+
+    Contoso plans to implement the following changes to the infrastructure:
+    - Move all the tiers of App1 to Azure.
+    - Move the existing product blueprint files to Azure Blob storage.
+    - Create a hybrid directory to support an upcoming Microsoft 365 migration project.
+
+    Technical Requirements
+
+    Contoso must meet the following technical requirements:
+    - Move all the virtual machines for App1 to Azure.
+    - Minimize the number of open ports between the App1 tiers.
+    - Ensure that all the virtual machines for App1 are protected by backups.
+    - Copy the blueprint files to Azure over the Internet.
+    - Ensure that the blueprint files are stored in the archive storage tier.
+    - Ensure that partner access to the blueprint files is secured and temporary.
+    - Prevent user passwords or hashes of passwords from being stored in Azure.
+    - Use unmanaged standard storage for the hard disks of the virtual machines.
+    - Ensure that when users join devices to Azure Active Directory (Azure AD),
+      the users use a mobile phone to verify their identity.
+    - Minimize administrative effort whenever possible.
+
+    User Requirements
+
+    Contoso identifies the following requirements for users:
+    - Ensure that only users who are part of a group named Pilot can join devices to Azure AD.
+    - Designate a new user named Admin1 as the service admin for the Azure subscription.
+    - Admin1 must receive email alerts regarding service outages.
+    - Ensure that a new user named User3 can create network objects for the Azure subscription.
+  questions:
+    - id: '001'
+      skill: Manage Azure identities and governance
+      sub-skill: Manage Microsoft Entra users and groups
+      question: |
+        HOTSPOT -
+
+        You need to configure the Device settings to meet the technical
+        requirements and the user requirements.
+
+        Which two settings should you modify? To answer, select the appropriate
+        settings in the answer area.
+
+        The Device settings exhibit shows the following current configuration:
+
+        | Setting | Available options | Current value |
+        | --- | --- | --- |
+        | Users may join devices to Azure AD | All, Selected, None | All |
+        | Additional local administrators on Azure AD joined devices | Selected, None | None |
+        | Users may register their devices with Azure AD | All, None | All |
+        | Require Multi-Factor Auth to join devices | Yes, No | No |
+        | Maximum number of devices per user | Numeric value | 50 |
+
+        The selection areas for both device join users and additional local
+        administrators display "No member selected". The toolbar shows Save,
+        Discard, and Got feedback?.
+      choices:
+        Users may join devices to Azure AD:
+          - All
+          - Selected
+          - None
+        Additional local administrators on Azure AD joined devices:
+          - Selected
+          - None
+        Users may register their devices with Azure AD:
+          - All
+          - None
+        Require Multi-Factor Auth to join devices:
+          - 'Yes'
+          - 'No'
+        Maximum number of devices per user:
+          - 50
+      answer:
+        Users may join devices to Azure AD: Selected
+        Require Multi-Factor Auth to join devices: 'Yes'
+      user_answer:
+        Users may join devices to Azure AD: Selected
+        Require Multi-Factor Auth to join devices: 'Yes'
+      user_result: correct
+      user_reasoning: |
+        Selected restricts device joining to the Pilot group. Requiring MFA
+        addresses the requirement to verify identity using a mobile phone.
+      learning_note: |
+        Select the Pilot group after changing device join permissions to Selected.
+        Requiring MFA does not by itself enforce a mobile-phone method; the
+        available authentication methods must also be configured appropriately.
+      explanation: |
+        Modify Users may join devices to Azure AD from All to Selected, then
+        select the Pilot group. This limits device joining to Pilot members.
+
+        Change Require Multi-Factor Auth to join devices from No to Yes.
+        This is the expected selection in the historical exhibit for requiring
+        additional identity verification during device joining. Phone-based
+        verification also depends on the configured authentication methods.
+
+        Registration permissions, additional local administrators, and the device
+        limit do not satisfy the two requirements being tested.
+
+        Azure AD is now called Microsoft Entra ID. For current deployments,
+        Microsoft recommends enforcing MFA for device registration or joining
+        through Conditional Access. When using that policy, the legacy device
+        setting must be No to avoid conflicting configurations.
+
+        [Microsoft Learn: Plan your Microsoft Entra join deployment](https://learn.microsoft.com/en-us/entra/identity/devices/device-join-plan)
+        [Microsoft Learn: Require MFA for device registration](https://learn.microsoft.com/en-us/entra/identity/conditional-access/policy-all-users-device-registration)
+
+    - id: '002'
+      skill: Manage Azure identities and governance
+      sub-skill: Manage Azure subscriptions and governance
+      question: |
+        You need to meet the user requirement for Admin1.
+        What should you do?
+      choices:
+        A: From the Azure Active Directory blade, modify the Groups.
+        B: From the Azure Active Directory blade, modify the Properties.
+        C: From the Subscriptions blade, select the subscription, and then modify the Access control (IAM) settings.
+        D: From the Subscriptions blade, select the subscription, and then modify the Properties.
+      answer: D
+      user_answer: C
+      user_result: incorrect
+      learning_note: |
+        In this legacy question, Service Administrator is a classic subscription
+        role changed through subscription Properties. IAM assigns Azure RBAC
+        roles such as Owner. Classic administrator roles have since retired.
+      explanation: |
+        Correct answer: **D. Modify the subscription Properties.**
+
+        The supplied answer C is corrected to D for the historical scenario.
+        Admin1 must become the subscription's Service Administrator, a classic
+        administrator role. The historical portal path was Subscriptions →
+        select the subscription → Properties → Change service admin.
+
+        C assigns Azure role-based access control (RBAC) roles such as Owner
+        through Access control (IAM). Although Owner provides broad subscription
+        access, it was distinct from the classic Service Administrator role.
+        A and B change directory configuration rather than the subscription's
+        Service Administrator.
+
+        Email alerts about outages are a separate requirement; this action
+        answers the administrator designation. Service Health alert rules and
+        an email action group can explicitly configure outage notifications.
+
+        This is an outdated practice question. Classic administrator roles
+        retired on August 31, 2024. Current subscription administration uses
+        Azure RBAC through IAM, so C describes the modern administration path.
+
+        [Microsoft Learn: Azure classic subscription administrators](https://learn.microsoft.com/en-us/azure/role-based-access-control/classic-administrators)
+        [Microsoft Learn: Add or change Azure subscription administrators](https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/add-change-subscription-administrator)
+
+    - id: '003'
+      skill: Monitor and maintain Azure resources
+      sub-skill: Implement backup and recovery
+      question: |
+        You need to implement a backup solution for App1 after the application is moved.
+        What should you create first?
+      choices:
+        A: a recovery plan
+        B: an Azure Backup Server
+        C: a backup policy
+        D: a Recovery Services vault
+      answer: D
+      user_answer: B
+      user_result: incorrect
+      learning_note: |
+        For Azure VM backup, create a Recovery Services vault first, then
+        select or create a backup policy and enable protection. Azure Backup
+        Server is not required for native Azure VM backup.
+      explanation: |
+        Correct answer: **D. A Recovery Services vault.**
+
+        The supplied answer B is corrected to D. After migration, App1 runs
+        on 15 Azure virtual machines across its three tiers. The requirement
+        is to protect all these VMs with backups while minimizing administration.
+        Use native Azure VM backup through Azure Backup.
+
+        Create a Recovery Services vault first. The vault manages backup
+        policies and recovery points. Then select an existing policy or create
+        one for the required schedule and retention, and enable backup for
+        the VMs. The vault must be in the same region as the protected VMs;
+        use a vault in each region if the VMs span multiple regions.
+
+        A recovery plan orchestrates failover with Azure Site Recovery rather
+        than configuring VM backups. Azure Backup Server is a separate server
+        product for protecting workloads and adds unnecessary infrastructure
+        here. A backup policy defines schedule and retention within a vault,
+        so it is not the first resource to create.
+
+        The shared scenario uses legacy unmanaged disks. Preserve that wording
+        for this historical question; it does not change the expected vault-first
+        answer.
+
+        [Microsoft Learn: Back up multiple Azure virtual machines](https://learn.microsoft.com/en-us/azure/backup/tutorial-backup-vm-at-scale)
+        [Microsoft Learn: Prepare Azure VM backup in a Recovery Services vault](https://learn.microsoft.com/en-us/azure/backup/backup-azure-arm-vms-prepare)
+
+    - id: '004'
+      skill: Implement and manage storage
+      sub-skill: Configure and manage storage accounts
+      question: |
+        You need to move the blueprint files to Azure.
+        What should you do?
+      choices:
+        A: Generate an access key. Map a drive, and then copy the files by using File Explorer.
+        B: Use Azure Storage Explorer to copy the files.
+        C: Use the Azure Import/Export service.
+        D: Generate a shared access signature (SAS). Map a drive, and then copy the files by using File Explorer.
+      answer: B
+      user_answer: B
+      user_result: correct
+      learning_note: |
+        Storage Explorer uploads files to Blob storage over the Internet.
+        Mapping an SMB drive targets Azure Files, while Import/Export transfers
+        data by shipping physical disks. Set the blobs to Archive separately.
+      explanation: |
+        Correct answer: **B. Use Azure Storage Explorer to copy the files.**
+
+        The decisive requirements are to copy the blueprint files over the
+        Internet and store them in Azure Blob storage. Storage Explorer can
+        upload local files or folders directly to a blob container, meeting
+        both requirements without deploying additional infrastructure.
+
+        Set the uploaded block blobs' access tier to Archive to satisfy the
+        storage-tier requirement. Uploading files alone does not guarantee
+        that they are archived. Archived blobs must be rehydrated to an online
+        tier before their contents can be read.
+
+        A describes mapping an Azure Files SMB share using a storage account
+        key, which does not upload to the required Blob storage destination.
+        C uses physical disks shipped to an Azure datacenter, conflicting with
+        the Internet-transfer requirement. D does not work as proposed: a SAS
+        authorizes supported storage requests but is not an SMB drive-mapping
+        credential and does not turn Blob storage into a Windows mapped drive.
+
+        The requirement for secured, temporary partner access is separate
+        from this upload question. A suitably scoped, expiring SAS can address
+        temporary access, but the drive-mapping step in D remains incorrect.
+
+        [Microsoft Learn: Manage blobs with Storage Explorer](https://learn.microsoft.com/en-us/azure/storage/storage-explorer/vs-azure-tools-storage-explorer-blobs)
+        [Microsoft Learn: Archive a blob](https://learn.microsoft.com/en-us/azure/storage/blobs/archive-blob)
+        [Microsoft Learn: Azure Import/Export service](https://learn.microsoft.com/en-us/azure/import-export/storage-import-export-service)
+        [Microsoft Learn: Mount an SMB Azure file share on Windows](https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-windows)
+
+    - id: '005'
+      skill: Implement and manage storage
+      sub-skill: Configure and manage storage accounts
+      question: |
+        HOTSPOT -
+
+        You need to identify the storage requirements for Contoso.
+        For each of the following statements, select Yes if the statement
+        is true. Otherwise, select No.
+        NOTE: Each correct selection is worth one point.
+
+        Answer Area:
+
+        | Statements | Yes | No |
+        | --- | --- | --- |
+        | Contoso requires a storage account that supports Blob storage. | Select | Select |
+        | Contoso requires a storage account that supports Azure Table storage. | Select | Select |
+        | Contoso requires a storage account that supports Azure File Storage. | Select | Select |
+      choices:
+        Contoso requires a storage account that supports Blob storage.:
+          - 'Yes'
+          - 'No'
+        Contoso requires a storage account that supports Azure Table storage.:
+          - 'Yes'
+          - 'No'
+        Contoso requires a storage account that supports Azure File Storage.:
+          - 'Yes'
+          - 'No'
+      answer:
+        Contoso requires a storage account that supports Blob storage.: 'Yes'
+        Contoso requires a storage account that supports Azure Table storage.: 'No'
+        Contoso requires a storage account that supports Azure File Storage.: 'No'
+      user_answer:
+        Contoso requires a storage account that supports Blob storage.: 'Yes'
+        Contoso requires a storage account that supports Azure Table storage.: 'No'
+        Contoso requires a storage account that supports Azure File Storage.: 'Yes'
+      user_result: partially_correct
+      user_reasoning: |
+        Selected Yes for Blob storage because the blueprint files must use
+        the archive tier. No reasoning was supplied for the other selections.
+      learning_note: |
+        Legacy unmanaged VM disks are VHDs stored as page blobs, not Azure
+        Files shares. Existing file servers do not establish an Azure Files
+        requirement unless their shares must be migrated to that service.
+      explanation: |
+        Correct selections: **Yes, No, No**, in the displayed order.
+        The learner's first two selections are correct; the third is corrected
+        from Yes to No.
+
+        Blob storage: Yes. The blueprint files explicitly move to Azure Blob
+        storage and must use the archive tier. Archive applies to block blobs.
+        The historical requirement for unmanaged VM disks also needs Blob
+        storage, because unmanaged VHDs are stored as page blobs. VM disks
+        must remain available and are not placed in the archive tier.
+
+        Azure Table storage: No. Table storage is a schemaless NoSQL service.
+        No requirement calls for it, and the existing SQL database does not
+        imply a migration to Table storage.
+
+        Azure File Storage: No. Azure Files provides managed file shares.
+        The planned changes move App1's VMs and the blueprint files, not the
+        existing file servers' shares to Azure Files. Blueprint files go to
+        Blob storage, and unmanaged VM disks use page blobs rather than file
+        shares. A storage account may support additional services, but that
+        capability does not make those services a requirement.
+
+        Unmanaged disks have since retired. The page-blob explanation reflects
+        the original historical scenario; current deployments use managed disks.
+
+        [Microsoft Learn: Introduction to Azure Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction)
+        [Microsoft Learn: Backup and disaster recovery for unmanaged disks](https://learn.microsoft.com/en-us/azure/virtual-machines/page-blobs-backup-and-disaster-recovery)
+        [Microsoft Learn: Blob access tiers](https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview)
+        [Microsoft Learn: Unmanaged disks retirement](https://learn.microsoft.com/en-us/azure/virtual-machines/unmanaged-disks-deprecation)
+
+    - id: '006'
+      skill: Implement and manage virtual networking
+      sub-skill: Configure and manage virtual networks in Azure
+      question: |
+        HOTSPOT -
+
+        You need to recommend a solution for App1. The solution must meet
+        the technical requirements.
+        What should you include in the recommendation? To answer, select
+        the appropriate options in the answer area.
+        NOTE: Each correct selection is worth one point.
+
+        Answer Area:
+
+        | Setting | Available options |
+        | --- | --- |
+        | Number of virtual networks | 1, 2, 3 |
+        | Number of subnets per virtual network | 1, 2, 3 |
+      choices:
+        Number of virtual networks:
+          - 1
+          - 2
+          - 3
+        Number of subnets per virtual network:
+          - 1
+          - 2
+          - 3
+      answer:
+        Number of virtual networks: 1
+        Number of subnets per virtual network: 3
+      user_answer:
+        Number of virtual networks: 1
+        Number of subnets per virtual network: 3
+      user_result: correct
+      learning_note: |
+        Use one virtual network for App1 and one subnet per application tier.
+        Subnets provide segmentation, but NSG rules must explicitly restrict
+        traffic; default NSG rules permit traffic within the virtual network.
+
+        Think of a VNet as a network boundary and a subnet as a division inside
+        that boundary. Start with one VNet for a closely related workload. Add
+        VNets when requirements justify separate networks:
+        - Different Azure regions: a VNet belongs to one region.
+        - Independent environments: separate production and development when
+          they need independent connectivity or administration.
+        - Different ownership or policies: teams can manage networks independently.
+        - Strong network isolation: VNets remain disconnected unless explicitly connected.
+        - Shared network services: a hub VNet can provide connectivity or
+          inspection for multiple application VNets.
+
+        More VNets add address planning, connectivity, routing, and DNS work.
+        They do not automatically improve security; connected VNets still need
+        traffic controls. App1 has no stated requirement for separate regions
+        or independently managed networks, so one VNet minimizes administration
+        while three subnets separate the web, processing, and SQL tiers.
+
+        Exam rule: choose VNets for network boundaries, subnets for tier
+        separation, and NSGs for traffic restrictions.
+      explanation: |
+        Correct selections: **1 virtual network and 3 subnets per virtual network.**
+
+        App1 has a web front end, a processing middle tier, and a SQL database
+        tier, each containing five VMs. Place all 15 VMs in one virtual network,
+        with the five VMs of each tier in a separate subnet. This supports
+        private communication between tiers while minimizing administration.
+
+        Associate network security groups (NSGs) with the tier subnets. Allow
+        HTTPS (TCP 443) for user access to the web front end and only the
+        application-required ports between the relevant tiers. Add deny rules
+        with higher priority than the default AllowVNetInBound rule to block
+        unwanted internal traffic. Separate subnets alone do not close ports.
+        The missing application diagram does not justify inventing specific
+        middle-tier or database port numbers.
+
+        Two or three virtual networks would add connectivity administration
+        without a stated requirement for that separation. One or two subnets
+        would not provide a separate subnet for each of the three tiers in
+        this recommended design. The number of subnets follows the tier count,
+        not the number of VMs.
+
+        [Microsoft Learn: Azure virtual networks and subnets](https://learn.microsoft.com/en-us/azure/networking/design-guide/vnets-subnets)
+        [Microsoft Learn: Network security groups](https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview)
+
+    - id: '007'
+      skill: Implement and manage virtual networking
+      sub-skill: Configure secure access to virtual networks
+      question: |
+        You are planning the move of App1 to Azure.
+        You create a network security group (NSG).
+        You need to recommend a solution to provide users with access to App1.
+        What should you recommend?
+      choices:
+        A: Create an incoming security rule for port 443 from the Internet. Associate the NSG to the subnet that contains the web servers.
+        B: Create an outgoing security rule for port 443 from the Internet. Associate the NSG to the subnet that contains the web servers.
+        C: Create an incoming security rule for port 443 from the Internet. Associate the NSG to all the subnets.
+        D: Create an outgoing security rule for port 443 from the Internet. Associate the NSG to all the subnets.
+      answer: A
+      user_answer: A
+      user_result: correct
+      learning_note: |
+        Determine NSG direction from the protected resource's perspective:
+        Internet users connecting to web servers is inbound traffic. HTTPS
+        uses TCP destination port 443. Scope the Internet-facing allow rule
+        to the web tier. NSGs are stateful, so response traffic for an allowed
+        connection does not require a separate outbound allow rule.
+      explanation: |
+        Correct answer: **A. Allow incoming port 443 from the Internet and
+        associate the NSG with the web-server subnet.**
+
+        App1's users access the web front end using HTTPS only. Configure an
+        inbound Allow rule with source Internet, protocol TCP, and destination
+        port 443. Give it a higher priority (lower priority number) than the
+        default inbound deny rule. Associating the NSG with the web subnet
+        applies the rule to all five web VMs with minimal administration.
+
+        B and D use the wrong direction. Outbound rules govern connections
+        leaving the protected resources; they do not permit users' incoming
+        HTTPS connections. NSGs track connection state and automatically
+        permit replies to an allowed connection.
+
+        C allows the correct port and direction but applies the Internet-facing
+        rule to the processing and database subnets as well. Only the web tier
+        requires user access. Keep backend tiers restricted to the required
+        inter-tier traffic rather than granting unnecessary Internet access.
+
+        This question concerns the NSG configuration. A public endpoint and
+        an HTTPS listener are also needed for actual user connectivity; an
+        NSG rule permits traffic but does not create either. If NIC-level NSGs
+        are also present, their rules must allow the incoming traffic too.
+
+        [Microsoft Learn: Network security groups overview](https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview)
+        [Microsoft Learn: How NSGs filter network traffic](https://learn.microsoft.com/en-us/azure/virtual-network/network-security-group-how-it-works)
+
+- id: 2
+  title: Contoso, Ltd. — Consulting company
+  description: |
+    Introductory Info
+
+    Case studies are not timed separately. Manage the overall exam time to
+    complete all questions. Each question in this case study is independent.
+    Review and change answers before moving to the next section; after starting
+    a new section, you cannot return to this section.
+
+    In the original exam interface, Next displays the first question. Buttons
+    in the left pane display the scenario information, and Question returns to
+    the question. All Information contains the same information as the other tabs.
+
+    Overview
+
+    Contoso, Ltd. is a consulting company that has a main office in Montreal
+    and branch offices in Seattle and New York.
+
+    Existing Environment
+
+    Contoso has an Azure subscription named Sub1 linked to an Azure Active
+    Directory (Azure AD) tenant. An on-premises Active Directory domain syncs
+    to the Azure AD tenant.
+
+    The Azure AD tenant contains the following users:
+
+    | Name | Type | Role |
+    | --- | --- | --- |
+    | User1 | Member | None |
+    | User2 | Guest | None |
+    | User3 | Member | None |
+    | User4 | Member | None |
+
+    Sub1 contains two resource groups named RG1 and RG2 and these virtual networks:
+
+    | Name | Subnet | Peered with |
+    | --- | --- | --- |
+    | VNET1 | Subnet1, Subnet2 | VNET2 |
+    | VNET2 | Subnet1 | VNET1, VNET3 |
+    | VNET3 | Subnet1 | VNET2 |
+    | VNET4 | Subnet1 | None |
+
+    User1 manages the resources in RG1. User4 manages the resources in RG2.
+
+    Sub1 contains the following virtual machines running Windows Server 2019:
+
+    | Name | IP address | Location | Connected to |
+    | --- | --- | --- | --- |
+    | VM1 | 10.0.1.4 | West US | VNET1/Subnet1 |
+    | VM2 | 10.0.2.4 | West US | VNET1/Subnet2 |
+    | VM3 | 172.16.1.4 | Central US | VNET2/Subnet1 |
+    | VM4 | 192.168.1.4 | West US | VNET3/Subnet1 |
+    | VM5 | 10.0.22.4 | East US | VNET4/Subnet1 |
+
+    No network security groups (NSGs) are associated with the network interfaces
+    or the subnets.
+
+    Sub1 contains the following storage accounts:
+
+    | Name | Kind | Location | File share | Identity-based access for file share |
+    | --- | --- | --- | --- | --- |
+    | storage1 | Storage (general purpose v1) | West US | sharea | Azure Active Directory Domain Services (Azure AD DS) |
+    | storage2 | StorageV2 (general purpose v2) | East US | shareb, sharec | Disabled |
+    | storage3 | BlobStorage | East US 2 | Not applicable | Not applicable |
+    | storage4 | FileStorage | Central US | shared | Azure Active Directory Domain Services (Azure AD DS) |
+
+    Requirements
+
+    Planned Changes
+
+    - Create a blob container named container1 and a file share named share1
+      that will use the Cool storage tier.
+    - Create a storage account named storage5 and configure storage replication
+      for the Blob service.
+    - Create NSG1 with these custom inbound security rules:
+
+    | Priority | Port | Protocol | Source | Destination | Action |
+    | --- | --- | --- | --- | --- | --- |
+    | 500 | 3389 | TCP | 10.0.2.0/24 | Any | Deny |
+    | 1000 | Any | ICMP | Any | VirtualNetwork | Allow |
+
+    Associate NSG1 with the network interface of VM1.
+
+    Create NSG2 with these custom outbound security rules:
+
+    | Priority | Port | Protocol | Source | Destination | Action |
+    | --- | --- | --- | --- | --- | --- |
+    | 200 | 3389 | TCP | 10.0.0.0/16 | VirtualNetwork | Deny |
+    | 400 | Any | ICMP | 10.0.2.0/24 | 10.0.1.0/24 | Allow |
+
+    Associate NSG2 with VNET1/Subnet2.
+
+    Technical Requirements
+
+    - Create container1 and share1.
+    - Use the principle of least privilege.
+    - Create an Azure AD security group named Group4.
+    - Back up the Azure file shares and virtual machines by using Azure Backup.
+    - Trigger an alert if VM1 or VM2 has less than 20 GB of free space on volume C.
+    - Enable User1 to create Azure policy definitions and User2 to assign Azure
+      policies to RG1.
+    - Create an internal Basic Azure Load Balancer named LB1 and connect it to
+      VNET1/Subnet1.
+    - Enable flow logging for IP traffic from VM5 and retain the flow logs for
+      eight months.
+    - Whenever possible, grant Group4 Azure role-based access control (Azure RBAC)
+      read-only permissions to the Azure file shares.
+  questions:
+    - id: '001'
+      skill: Monitor and maintain Azure resources
+      sub-skill: Implement backup and recovery
+      question: |
+        HOTSPOT -
+
+        You need to configure Azure Backup to back up the file shares and
+        virtual machines.
+
+        What is the minimum number of Recovery Services vaults and backup
+        policies you should create? Select the appropriate options in the
+        answer area. Each correct selection is worth one point.
+      choices:
+        Recovery Services vaults: [1, 2, 3, 4, 7]
+        Backup policies: [1, 2, 3, 4, 5, 6]
+      answer:
+        Recovery Services vaults: 3
+        Backup policies: 6
+      user_answer:
+        Recovery Services vaults: 1
+        Backup policies: No ideas
+      user_result: incorrect
+      user_reasoning: Believed one Recovery Services vault could protect all the VMs; did not know the policy count.
+      learning_note: |
+        Recovery Services vaults are regional. Count one vault per region,
+        then one policy per workload type in each vault when schedules can be shared.
+      explanation: |
+        Create three Recovery Services vaults and six backup policies.
+        A vault must be in the same region as the resources it protects.
+        VM and Azure Files backup require separate workload-specific policies,
+        and policies belong to their vault.
+
+        | Vault region | Virtual machines | File shares | Minimum policies |
+        | --- | --- | --- | --- |
+        | West US | VM1, VM2, VM4 | storage1: sharea | 2 |
+        | Central US | VM3 | storage4: shared | 2 |
+        | East US | VM5 | storage2: shareb, sharec | 2 |
+
+        Multiple VMs can share a VM policy, and multiple file shares can share
+        an Azure Files policy in the same vault. No distinct schedules or
+        retention requirements are specified. Storage3 in East US 2 has no
+        file shares or VMs to protect, so it adds no vault. The planned share1
+        has no specified location and does not establish another required region.
+
+        The supplied vault count of one is corrected to three.
+
+        [Microsoft Learn: Azure Backup guidance](https://learn.microsoft.com/en-us/azure/backup/guidance-best-practices)
+        [Microsoft Learn: Backup policy types](https://learn.microsoft.com/en-us/cli/azure/backup/policy?view=azure-cli-latest)
+        [Microsoft Learn: Back up Azure Files](https://learn.microsoft.com/en-us/azure/backup/tutorial-backup-azure-files-vault-tier-portal)
+
+    - id: '002'
+      skill: Monitor and maintain Azure resources
+      sub-skill: Monitor resources in Azure
+      question: |
+        DRAG DROP -
+
+        You need to configure the alerts for VM1 and VM2 to meet the technical
+        requirements.
+
+        Which three actions should you perform in sequence? Select three
+        actions from the list and arrange them in the correct order.
+      choices:
+        - Create a Log Analytics workspace.
+        - Configure the Diagnostic settings.
+        - Create an alert rule.
+        - Collect Windows performance counters from the Log Analytics agents.
+        - Create an Azure SQL database.
+      answer:
+        - Create a Log Analytics workspace.
+        - Collect Windows performance counters from the Log Analytics agents.
+        - Create an alert rule.
+      user_answer:
+        - Create a Log Analytics workspace.
+        - Collect Windows performance counters from the Log Analytics agents.
+        - Create an alert rule.
+      user_result: correct
+      learning_note: |
+        Free space on C: is a guest operating system measurement. Collect guest
+        performance counters before configuring the alert that evaluates them.
+      explanation: |
+        First create the workspace that receives the monitoring data. Then
+        collect Windows performance counters from VM1 and VM2, including
+        LogicalDisk(C:)\Free Megabytes. Finally, create an alert rule that
+        triggers when either VM has less than 20 GB free on C:.
+
+        Diagnostic settings alone do not collect the required guest disk-space
+        counter. An Azure SQL database is unnecessary.
+
+        The original wording says to move all actions, but requests three actions
+        and supplies five choices. Select the three required actions above.
+        This historical question uses the Log Analytics agent; current
+        deployments use Azure Monitor Agent and data collection rules.
+
+        [Microsoft Learn: Virtual machine alerts](https://learn.microsoft.com/en-us/azure/azure-monitor/vm/monitor-virtual-machine-alerts)
+
+    - id: '003'
+      skill: Manage Azure identities and governance
+      sub-skill: Manage access to Azure resources
+      question: |
+        HOTSPOT -
+
+        You need to ensure that User1 can create initiative definitions, and
+        User4 can assign initiatives to RG2. The solution must meet the
+        technical requirements.
+
+        Which role should you assign to each user? Select the appropriate
+        options in the answer area. Each correct selection is worth one point.
+      choices:
+        User1:
+          - Contributor for RG1
+          - Contributor for Sub1
+          - Security Admin for RG1
+          - Resource Policy Contributor for Sub1
+        User4:
+          - Contributor for RG2
+          - Contributor for Sub1
+          - Security Admin for Sub1
+          - Resource Policy Contributor for RG2
+      answer:
+        User1: Resource Policy Contributor for Sub1
+        User4: Resource Policy Contributor for RG2
+      user_answer:
+        User1: Resource Policy Contributor for Sub1
+        User2: Security Admin for Sub1
+      user_result: partially_correct
+      learning_note: |
+        The question asks about User4, not User2. Use Resource Policy Contributor
+        at subscription scope to create definitions and at RG2 scope to assign
+        initiatives to RG2 with least privilege.
+      explanation: |
+        User1 needs Resource Policy Contributor for Sub1. Initiative definitions
+        are policy set definitions created at subscription or management group
+        scope; they cannot be created at resource group scope.
+
+        User4 needs Resource Policy Contributor for RG2. This permits initiative
+        assignments within RG2 while limiting access to the required scope.
+        Resource Policy Contributor includes policy definition, policy set
+        definition, and policy assignment operations. Contributor excludes
+        the required Microsoft.Authorization write operations, and Security
+        Admin does not provide the required initiative management permissions.
+
+        The learner's User1 selection is correct. The second supplied selection
+        names User2 instead of User4 and uses the wrong role and scope; it is
+        preserved in user_answer. The question-specific requirement concerns
+        User4 and RG2, despite the shared scenario also mentioning User2 and RG1.
+
+        [Microsoft Learn: Azure Policy overview and permissions](https://learn.microsoft.com/en-us/azure/governance/policy/overview)
+
+    - id: '004'
+      skill: Implement and manage storage
+      sub-skill: Configure access to storage
+      question: |
+        You need to ensure that you can grant Group4 Azure RBAC read-only
+        permissions to all the Azure file shares.
+
+        What should you do?
+      choices:
+        A: On storage2, enable identity-based access for the file shares.
+        B: Recreate storage2 and set Hierarchical namespace to Enabled.
+        C: On storage1 and storage4, change the Account kind type to StorageV2 (general purpose v2).
+        D: Create a shared access signature (SAS) for storage1, storage2, and storage4.
+      answer: A
+      user_answer: A
+      user_result: correct
+      learning_note: |
+        Storage File Data SMB Share Reader grants read-only file data access.
+        The generic Reader role only grants access to resource configuration.
+      explanation: |
+        Enable identity-based access on storage2. Storage1 and storage4 already
+        have Azure AD DS identity-based access enabled, while storage2 has it
+        disabled. This enables identity-based SMB access with Azure RBAC
+        share-level permissions across the existing file shares.
+
+        Grant Group4 Storage File Data SMB Share Reader at the required share
+        scopes for least privilege. File and directory ACLs must also permit
+        access. The generic Reader role does not grant file data access.
+
+        B configures a Data Lake Storage feature rather than Azure Files SMB
+        authentication. C does not enable identity-based access, and changing
+        storage1 or storage4 is unnecessary. D grants token-based access rather
+        than assigning Azure RBAC permissions to Group4.
+
+        Azure AD and Azure AD DS are now named Microsoft Entra ID and Microsoft
+        Entra Domain Services, respectively.
+
+        [Microsoft Learn: Assign Azure Files share-level permissions](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-identity-assign-share-level-permissions)
+
+    - id: '005'
+      skill: Implement and manage storage
+      sub-skill: Configure Azure Files and Azure Blob Storage
+      question: |
+        HOTSPOT -
+
+        You need to create container1 and share1.
+
+        Which storage accounts should you use for each resource? Select the
+        appropriate options in the answer area. Each correct selection is
+        worth one point.
+      choices:
+        container1:
+          - storage2 only
+          - storage2 and storage3 only
+          - storage1, storage2, and storage3 only
+          - storage2, storage3, and storage4 only
+          - storage1, storage2, storage3, and storage4
+        share1:
+          - storage2 only
+          - storage4 only
+          - storage2 and storage4 only
+          - storage1, storage2, and storage4 only
+          - storage1, storage2, storage3, and storage4
+      answer:
+        container1: storage2 and storage3 only
+        share1: storage2 only
+      user_answer:
+        container1: storage2 only
+        share1: storage2 only
+      user_result: partially_correct
+      user_reasoning: Selected storage2 for container1 because general-purpose v2 supports the Cool access tier; also selected storage2 for share1.
+      learning_note: |
+        Both general-purpose v2 and legacy BlobStorage accounts support Cool
+        blobs. Cool Azure file shares require the standard general-purpose v2
+        account among the account types listed in this scenario.
+      explanation: |
+        container1: storage2 and storage3 only.
+        share1: storage2 only.
+
+        The planned changes require the Cool storage tier. Evaluate both the
+        resource type and its tier, rather than merely whether an account can
+        contain blobs or file shares.
+
+        | Account | Kind in the exhibit | Cool blobs | Cool file shares |
+        | --- | --- | --- | --- |
+        | storage1 | Storage (general purpose v1) | No | No |
+        | storage2 | StorageV2 (general purpose v2) | Yes | Yes |
+        | storage3 | BlobStorage | Yes | No; does not host file shares |
+        | storage4 | FileStorage | No; does not host blobs | No; premium file shares |
+
+        Storage2 supports both resources with the required tiers. Storage3
+        also supports Cool blobs, so it is eligible for container1. The Cool
+        tier applies to the blobs in the container, rather than to the container
+        object itself. Storage1 can host blobs and file shares but does not
+        provide the required Cool tiers in its stated GPv1 configuration.
+        Storage4 hosts premium file shares rather than Cool file shares.
+
+        The supplied container1 answer is corrected to include storage3.
+        The share1 answer is correct. Use the account kinds as shown in this
+        historical exhibit; upgrading a legacy account would change its
+        capabilities and is not requested by the question.
+
+        [Microsoft Learn: Blob access tiers](https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview)
+        [Microsoft Azure: Blob Storage tiers and account types](https://azure.microsoft.com/en-us/pricing/details/storage/blobs/)
+        [Microsoft Learn: Azure Files billing and access tiers](https://learn.microsoft.com/en-us/azure/storage/files/understanding-billing)
+
+    - id: '006'
+      skill: Implement and manage storage
+      sub-skill: Configure and manage storage accounts
+      question: |
+        HOTSPOT -
+
+        You need to create storage5. The solution must support the planned changes.
+
+        Which type of storage account should you use, and which account should
+        you configure as the destination storage account? Select the appropriate
+        options in the answer area. Each correct selection is worth one point.
+      choices:
+        Account kind:
+          - BlobStorage
+          - BlockBlobStorage
+          - Storage (general purpose v1)
+          - StorageV2 (general purpose v2)
+        Destination:
+          - Storage1
+          - Storage2
+          - Storage3
+          - Storage4
+      answer:
+        Account kind: StorageV2 (general purpose v2)
+        Destination: Storage2
+      user_answer:
+        Account kind: StorageV2 (general purpose v2)
+        Destination: Storage2
+      user_result: correct
+      learning_note: |
+        Object replication copies block blobs between storage accounts. Both
+        accounts must support object replication; supporting Cool blobs alone
+        is insufficient. Current support includes GPv2 and premium BlockBlobStorage.
+      explanation: |
+        Expected historical selections: StorageV2 (general purpose v2) for
+        storage5 and Storage2 as the destination. The learner's selections
+        match these answers.
+
+        The requirement to configure replication for the Blob service with a
+        destination storage account refers to object replication. Storage2 is
+        GPv2 and supports object replication. Storage1 is GPv1, storage3 is
+        legacy BlobStorage, and storage4 is FileStorage; none supports object
+        replication in the configuration shown. Storage3 can store Cool blobs
+        but that does not make it a supported object replication destination.
+
+        Enable blob versioning on both source and destination accounts and
+        change feed on the source account. Configure replication rules for the
+        source and destination containers. Object replication is asynchronous
+        and applies to block blobs; it differs from account redundancy such
+        as GRS, whose secondary location is managed by Azure.
+
+        Currency caveat: current Microsoft documentation supports both GPv2
+        and premium block blob (BlockBlobStorage) accounts as sources and
+        destinations. Therefore BlockBlobStorage is also technically valid for
+        storage5 under current rules, given the requirements supplied. The
+        prompt does not state a standard-performance or cost constraint that
+        would exclude it. StorageV2 remains valid and is the expected historical
+        selection, but the account-kind dropdown is ambiguous under current
+        support. Storage2 remains the only eligible destination listed.
+
+        [Microsoft Learn: Object replication overview](https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-overview)
+        [Microsoft Learn: Configure object replication](https://learn.microsoft.com/en-us/azure/storage/blobs/object-replication-configure)
+
+    - id: '007'
+      skill: Monitor and maintain Azure resources
+      sub-skill: Monitor resources in Azure
+      question: |
+        You need to identify which storage account to use for the flow logging
+        of IP traffic from VM5. The solution must meet the retention requirements.
+
+        Which storage account should you identify?
+      choices:
+        A: storage1
+        B: storage2
+        C: storage3
+        D: storage4
+      answer: B
+      user_answer: B
+      user_result: correct
+      user_reasoning: Selected storage2 because it is in the same region as VM5.
+      learning_note: |
+        Check both region and account kind. For the historical NSG flow-log
+        retention feature, use a GPv2 storage account in the NSG's region.
+        East US and East US 2 are different regions.
+      explanation: |
+        B. storage2 is correct. VM5 is in East US, and storage2 is a
+        StorageV2 (general purpose v2) account in East US. It meets both the
+        regional requirement and the eight-month retention requirement.
+
+        In the historical NSG flow-log solution, the storage account must be
+        in the same region as the network security group being logged.
+        Built-in retention is available only with general-purpose v2 accounts
+        and supports a retention period of up to one year, covering eight months.
+        The learner's region reasoning is correct; GPv2 retention support is
+        the additional decisive requirement.
+
+        A is a GPv1 account in West US. C is legacy BlobStorage in East US 2,
+        which is a different region from East US, and does not support the
+        required built-in retention feature. D is FileStorage in Central US
+        and does not provide the required blob storage destination.
+
+        The scenario initially has no NSG associated with VM5 or its subnet.
+        The historical NSG flow-log implementation would also require an NSG
+        associated with VM5's network interface or subnet; this question only
+        asks which storage account to select.
+
+        Current deployments should use virtual network flow logs. Creation of
+        new NSG flow logs is no longer supported, and NSG flow logs retire on
+        September 30, 2027. Storage2 remains appropriate for the current flow-log
+        solution and its retention configuration.
+
+        [Microsoft Learn: NSG flow logs and retention](https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-overview)
+        [Microsoft Learn: Manage virtual network flow logs](https://learn.microsoft.com/en-us/azure/network-watcher/vnet-flow-logs-manage)
+
+    - id: '008'
+      skill: Implement and manage virtual networking
+      sub-skill: Configure secure access to virtual networks
+      question: |
+        HOTSPOT -
+
+        You implement the planned changes for NSG1 and NSG2.
+
+        For each of the following statements, select Yes if the statement is
+        true. Otherwise, select No.
+      choices:
+        From VM1, you can establish a Remote Desktop session to VM2.:
+          - 'Yes'
+          - 'No'
+        From VM2, you can ping VM3.:
+          - 'Yes'
+          - 'No'
+        From VM2, you can establish a Remote Desktop session to VM3.:
+          - 'Yes'
+          - 'No'
+      answer:
+        From VM1, you can establish a Remote Desktop session to VM2.: 'Yes'
+        From VM2, you can ping VM3.: 'Yes'
+        From VM2, you can establish a Remote Desktop session to VM3.: 'No'
+      user_answer:
+        From VM1, you can establish a Remote Desktop session to VM2.: 'Yes'
+        From VM2, you can ping VM3.: 'Yes'
+        From VM2, you can establish a Remote Desktop session to VM3.: 'No'
+      user_result: correct
+      user_reasoning: |
+        Selected Yes for VM1-to-VM2 RDP because no custom inbound rules block
+        VM2 and default virtual network rules allow the connection. Selected
+        Yes for VM2-to-VM3 ping because VNET1 and VNET2 are peered and no NSG
+        rule blocks ICMP. Selected No for VM2-to-VM3 RDP because VM2 outbound
+        RDP traffic is blocked.
+      learning_note: |
+        NSG2 has default inbound rules even though only custom outbound rules
+        are specified. NSGs are stateful, so replies to an allowed session do
+        not need an independent allow rule. The custom ICMP allow targets
+        10.0.1.0/24; ping to VM3 instead uses default AllowVnetOutBound.
+      explanation: |
+        Correct selections: Yes, Yes, No.
+
+        VM1 to VM2 Remote Desktop: Yes. NSG1's default outbound rule permits
+        the TCP 3389 request from VM1. NSG1's custom RDP deny is inbound to
+        VM1, so it does not block this request. NSG2's default AllowVnetInBound
+        permits the request into VM2. NSGs are stateful: response traffic for
+        the allowed session is permitted, without independently applying the
+        outbound deny as if the response were a new RDP connection.
+
+        VM2 to VM3 ping: Yes. VNET1 and VNET2 are directly peered. NSG2's
+        priority-200 deny applies to TCP 3389, not ICMP. Its priority-400 ICMP
+        allow targets 10.0.1.0/24 and does not match VM3 at 172.16.1.4. The
+        default AllowVnetOutBound rule at priority 65000 allows the ping because
+        VirtualNetwork includes the directly peered VNET2. VM3 has no NSG.
+
+        VM2 to VM3 Remote Desktop: No. NSG2's priority-200 outbound deny matches
+        VM2's source IP 10.0.2.4 within 10.0.0.0/16, TCP destination port 3389,
+        and VM3 within the VirtualNetwork service tag. This custom deny takes
+        precedence over the default allow at priority 65000. The priority-400
+        ICMP rule cannot allow TCP RDP traffic.
+
+        These answers evaluate the Azure network configuration supplied in the
+        case study. They assume the guest firewalls and services permit the
+        tested traffic; the exhibits do not specify guest firewall restrictions.
+
+        [Microsoft Learn: NSG rules, defaults, and stateful behavior](https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview)
+        [Microsoft Learn: VirtualNetwork service tag](https://learn.microsoft.com/en-us/azure/virtual-network/service-tags-overview)
+
+
+    - id: '009'
+      skill: Implement and manage virtual networking
+      sub-skill: Configure name resolution and load balancing
+      question: |
+        You need to add VM1 and VM2 to the backend pool of LB1.
+
+        What should you do first?
+      choices:
+        A: Connect VM2 to VNET1/Subnet1.
+        B: Redeploy VM1 and VM2 to the same availability zone.
+        C: Redeploy VM1 and VM2 to the same availability set.
+        D: Create a new NSG and associate the NSG to VNET1/Subnet1.
+      answer: C
+      user_answer: A
+      user_result: incorrect
+      learning_note: |
+        A Basic Load Balancer backend pool requires VMs in a single availability
+        set or virtual machine scale set. Sharing a subnet does not replace
+        this requirement. Standard Load Balancer allows VMs across availability
+        sets and zones within one virtual network.
+      explanation: |
+        C. Redeploy VM1 and VM2 to the same availability set.
+
+        LB1 is explicitly a Basic internal Load Balancer. Its backend pool
+        supports virtual machines in a single availability set or virtual
+        machine scale set. No common availability set is specified for VM1
+        and VM2, so redeploy them into one before adding them to the pool.
+        An existing VM cannot simply be assigned to a different availability
+        set; recreation using its existing disks is a typical approach.
+
+        A does not satisfy the Basic SKU availability-set requirement. VM1 and
+        VM2 already belong to VNET1, and backend VMs do not need to share the
+        frontend's subnet. Subnet1 identifies the location of LB1's private
+        frontend IP; it does not require moving VM2 out of Subnet2.
+        B confuses availability zones with availability sets; Basic Load
+        Balancer does not support availability zones. D changes traffic
+        filtering and does not make the VMs eligible for the backend pool.
+
+        The supplied answer A is corrected to C. The decisive keyword is Basic.
+        Standard Load Balancer supports backend VMs across availability sets
+        and zones within one virtual network.
+
+        This is a historical question: Basic Load Balancer retired on
+        September 30, 2025. Current deployments should use Standard Load
+        Balancer, which does not require these VMs to share an availability set.
+
+        [Microsoft Learn: Load Balancer SKU comparison](https://learn.microsoft.com/en-us/azure/load-balancer/skus)
+
+
+    - id: '010'
+      skill: Implement and manage virtual networking
+      sub-skill: Configure and manage virtual networks in Azure
+      question: |
+        You need to ensure that VM1 can communicate with VM4. The solution
+        must minimize administrative effort.
+
+        What should you do?
+      choices:
+        A: Create a user-defined route from VNET1 to VNET3.
+        B: Create an NSG and associate the NSG to VM1 and VM4.
+        C: Assign VM4 an IP address of 10.0.1.5/24.
+        D: Establish peering between VNET1 and VNET3.
+      answer: D
+      user_answer: D
+      user_result: correct
+      learning_note: |
+        Virtual network peering is not transitive. If VNET1 peers with VNET2
+        and VNET2 peers with VNET3, VNET1 cannot automatically reach VNET3.
+        Direct peering is the simplest solution when transit infrastructure
+        is not already present.
+      explanation: |
+        D. Establish peering between VNET1 and VNET3.
+
+        VM1 belongs to VNET1/Subnet1 and VM4 belongs to VNET3/Subnet1. The
+        existing peerings connect VNET1 to VNET2 and VNET2 to VNET3, but peering
+        is not transitive. Those connections do not create a route between
+        VNET1 and VNET3. Configure direct peering in both directions with
+        virtual network access allowed to enable private-IP communication.
+        Peered virtual networks must have nonoverlapping address spaces.
+
+        Direct peering minimizes administrative effort because it supplies
+        connectivity and routing without adding a router or virtual appliance.
+        The supplied answer D is correct.
+
+        A does not establish connectivity by itself. Transit through VNET2
+        would require a forwarding device or other transit infrastructure,
+        appropriate routes, and forwarding configuration; none is specified.
+        B filters traffic but cannot connect isolated virtual networks.
+        NSGs are associated with network interfaces or subnets, rather than
+        directly with the VM resource. C assigns an address from VM1's subnet
+        to a VM attached to VNET3 and does not connect the networks; a private
+        NIC address must belong to its attached subnet's address range.
+
+        The planned NSG1 deny targets inbound RDP from 10.0.2.0/24, not VM4's
+        192.168.1.4 address. NSG2 is attached to VNET1/Subnet2, not VM1's subnet.
+        Therefore those custom rules do not prevent the required general
+        connectivity after direct peering. Specific applications still depend
+        on guest firewall and service configuration.
+
+        [Microsoft Learn: Peering requirements and nontransitive behavior](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering)
+        [Microsoft Learn: Virtual network peering overview](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
+
+- id: 3
+  title: Litware, Inc.
+  description: |
+    Overview
+
+    Litware, Inc. is a consulting company with a main office in Montreal and
+    branch offices in Seattle and New York. Montreal has 2,000 employees,
+    Seattle has 1,000 employees, and New York has 200 employees.
+    All resources used by Litware are hosted on-premises.
+
+    Litware creates a new Azure subscription. Its Azure Active Directory
+    (Azure AD) tenant uses litware.onmicrosoft.com and the Premium P1 tier.
+    Azure AD is now called Microsoft Entra ID; the historical wording is retained.
+
+    Existing Environment
+
+    The network contains an Active Directory forest named litware.com.
+    All domain controllers are DNS servers and host the litware.com DNS zone.
+
+    Litware has finance, human resources, sales, research, and information
+    technology departments. Each department has an organizational unit (OU)
+    containing all its accounts. All user accounts have the department
+    attribute set to their respective department. New users are added frequently.
+    Litware.com contains a user named User1.
+
+    All offices connect using private connections. Montreal and Seattle have
+    data centers. Each office has a firewall that can be configured as a VPN device.
+    All infrastructure servers are virtualized.
+
+    | Name | Role | Contains virtual machine |
+    | --- | --- | --- |
+    | Server1 | VMware vCenter server | VM1 |
+    | Server2 | Hyper-V host | VM2 |
+
+    Litware uses two web applications, App1 and App2. Each instance of each
+    application requires 1 GB of memory.
+    The Azure subscription contains these resources:
+
+    | Name | Type |
+    | --- | --- |
+    | VNet1 | Virtual network |
+    | VM3 | Virtual machine |
+    | VM4 | Virtual machine |
+
+    The network security team implements several network security groups (NSGs).
+
+    Requirements
+
+    Planned Changes
+
+    - Deploy Azure ExpressRoute to the Montreal office.
+    - Migrate the virtual machines hosted on Server1 and Server2 to Azure.
+    - Synchronize on-premises Active Directory to Azure AD.
+    - Migrate App1 and App2 to Azure web apps named WebApp1 and WebApp2.
+
+    Technical Requirements
+
+    - Ensure WebApp1 adjusts its instance count automatically based on load,
+      scaling out to five instances.
+    - Ensure VM3 can establish outbound TCP connections to port 8080 on the
+      application servers in Montreal.
+    - Exchange routing information automatically between Azure and the
+      routers in Montreal.
+    - Enable Azure Multi-Factor Authentication (MFA) for finance users only.
+    - Ensure webapp2.azurewebsites.net is accessible using app2.litware.com.
+    - Connect the New York office to VNet1 over the Internet using encryption.
+    - Create a workflow that sends an email when VM4's settings are modified.
+    - Create a custom Azure role named Role1 based on the Reader role.
+    - Minimize costs whenever possible.
+
+    Exhibit limitations
+
+    The supplied source references Attachment.tiff, but no additional topology
+    was supplied. Question 002 mentions VNET3, which is absent from the shared
+    resource table. VM1 and VM4's VNet assignments and the VNets' address spaces
+    are not supplied; no missing topology is invented.
+  questions:
+    - id: '001'
+      skill: Monitor and maintain Azure resources
+      sub-skill: Monitor resources in Azure
+      question: |
+        You discover that VM3 does NOT meet the technical requirements.
+        You need to verify whether the issue relates to the NSGs.
+        What should you use?
+      choices:
+        A: Diagram in VNet1
+        B: Diagnostic settings in Azure Monitor
+        C: Diagnose and solve problems in Traffic Manager profiles
+        D: The security recommendations in Azure Advisor
+        E: IP flow verify in Azure Network Watcher
+      answer: E
+      user_answer: E
+      user_result: correct
+      explanation: |
+        E. IP flow verify in Azure Network Watcher checks whether security rules
+        allow or deny a specified flow to or from a VM and identifies the rule
+        responsible. This directly tests whether NSGs block VM3's required flow.
+
+        Select VM3, Outbound, and TCP. Set the local IP to VM3's private IP,
+        the local port to an ephemeral source port, the remote IP to the Montreal
+        application server's IP, and the remote port to 8080. Port 8080 is the
+        destination port, not the client's source port.
+
+        An Allowed result confirms the tested flow passes the security rules;
+        it does not prove end-to-end connectivity. Routing, on-premises firewalls,
+        and the destination application can still cause failures.
+
+        A displays topology. B configures diagnostic data collection. C addresses
+        Traffic Manager rather than VM security rules. D provides recommendations
+        rather than evaluating this specific flow.
+
+        [Microsoft Learn: IP flow verify](https://learn.microsoft.com/en-us/azure/network-watcher/ip-flow-verify-overview)
+
+    - id: '002'
+      skill: Implement and manage virtual networking
+      sub-skill: Configure and manage virtual networks in Azure
+      question: |
+        You need to ensure that VM1 can communicate with VM4.
+        The solution must minimize the administrative effort.
+        What should you do?
+
+        The supplied shared exhibit does not show VNET3 or the VNet assignments
+        of VM1 and VM4. The expected answer assumes the VMs are in VNET1 and
+        VNET3, with non-overlapping address spaces and security rules permitting
+        the required traffic.
+      choices:
+        A: Create an NSG and associate the NSG to VM1 and VM4.
+        B: Establish peering between VNET1 and VNET3.
+        C: Assign VM4 an IP address of 10.0.1.5/24.
+        D: Create a user-defined route from VNET1 to VNET3.
+      answer: B
+      user_answer: B
+      user_result: correct
+      learning_note: |
+        Peering connects VNets and adds routes automatically. NSGs filter
+        traffic; a user-defined route alone cannot connect disconnected VNets.
+      explanation: |
+        B. Establish VNet peering. Under the stated assumptions, peering enables
+        communication between VM1 and VM4 using private IP addresses over the
+        Microsoft backbone. Azure adds the necessary peering routes automatically,
+        minimizing administrative effort. Configure peering in both directions
+        and allow virtual network access; applicable NSGs and guest firewalls
+        must also permit the traffic.
+
+        A controls traffic permissions but does not establish network connectivity.
+        NSGs are associated with subnets or network interfaces, rather than directly
+        with VM resources. C changes an IP address without connecting the VNets.
+        D controls routing but does not create a path between disconnected VNets.
+
+        B is the expected answer, but the missing topology prevents independently
+        confirming the VMs' placement from the supplied shared scenario.
+
+        [Microsoft Learn: Virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
+
+    - id: '003'
+      skill: Implement and manage virtual networking
+      sub-skill: Configure and manage virtual networks in Azure
+      question: |
+        HOTSPOT -
+
+        You need to meet the connection requirements for the New York office.
+        What should you do? Select the appropriate options in the answer area.
+        Each correct selection is worth one point.
+      choices:
+        From the Azure portal:
+          - Create an ExpressRoute circuit only.
+          - Create a virtual network gateway only.
+          - Create a virtual network gateway and a local network gateway.
+          - Create an ExpressRoute circuit and an on-premises data gateway.
+          - Create a virtual network gateway and an on-premises data gateway.
+        In the New York office:
+          - Deploy ExpressRoute.
+          - Deploy a DirectAccess server.
+          - Implement a Web Application Proxy.
+          - Configure a site-to-site VPN connection.
+      answer:
+        From the Azure portal: Create a virtual network gateway and a local network gateway.
+        In the New York office: Configure a site-to-site VPN connection.
+      user_answer:
+        From the Azure portal: Create an ExpressRoute circuit and an on-premises data gateway.
+        In the New York office: Configure a site-to-site VPN connection.
+      user_result: partially_correct
+      learning_note: |
+        An encrypted office-to-VNet connection over the Internet requires a
+        site-to-site VPN. A local network gateway is an Azure resource representing
+        the office network; it is different from an on-premises data gateway.
+        Private connectivity and encryption are separate requirements.
+      explanation: |
+        Select Create a virtual network gateway and a local network gateway
+        in Azure, and Configure a site-to-site VPN connection in New York.
+        The supplied first selection is corrected; the second selection is correct.
+
+        The requirement explicitly says over the Internet using encryption.
+        A site-to-site VPN provides an IPsec/IKE encrypted tunnel between the
+        New York firewall configured as a VPN device and Azure's VPN gateway.
+        The virtual network gateway is the Azure tunnel endpoint in VNet1.
+        The local network gateway is an Azure resource representing the office's
+        VPN device public IP address and its network address ranges. Create a
+        site-to-site connection resource linking the gateways and configure the
+        office VPN device with matching connection settings.
+
+        ExpressRoute provides private connectivity that avoids the public Internet;
+        the scenario plans it for Montreal. An on-premises data gateway enables
+        supported cloud services to access on-premises data sources and is not a
+        network VPN endpoint. DirectAccess and Web Application Proxy do not
+        provide the requested office-to-VNet site-to-site connection.
+
+        Follow-up: Would requiring a private connection change the answer?
+        If private means traffic protected inside an encrypted tunnel over the
+        Internet, the VPN answer remains correct. If it means avoiding the public
+        Internet, use ExpressRoute. Connecting a VNet that way requires an
+        ExpressRoute circuit and an ExpressRoute virtual network gateway; none
+        of the first dropdown's options fully describes that combination.
+        An on-premises data gateway is still incorrect. ExpressRoute is not
+        encrypted by default, so encryption must be addressed separately if
+        both private transport and encryption are required.
+
+        [Microsoft Learn: Create a site-to-site VPN](https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-site-to-site-portal)
+        [Microsoft Learn: VPN Gateway connectivity options](https://learn.microsoft.com/en-us/azure/vpn-gateway/design)
+
+    - id: '004'
+      skill: Manage Azure identities and governance
+      sub-skill: Manage access to Azure resources
+      question: |
+        HOTSPOT -
+
+        You need to implement Role1.
+        Which command should you run before you create Role1?
+        Select the appropriate options in the answer area.
+        Each correct selection is worth one point.
+
+        Complete the command:
+
+        ```powershell
+        [First command] -Name "Reader" | [Second command]
+        ```
+      choices:
+        First command:
+          - Find-RoleCapability
+          - Get-AzureADDirectoryRole
+          - Get-AzRoleDefinition
+          - Get-AzResourceProvider
+        Second command:
+          - ConvertFrom-Json
+          - ConvertFrom-String
+          - ConvertTo-Json
+          - ConvertTo-Xml
+      answer:
+        First command: Get-AzRoleDefinition
+        Second command: ConvertTo-Json
+      user_answer:
+        First command: Get-AzRoleDefinition
+        Second command: ConvertTo-Json
+      user_result: correct
+      learning_note: |
+        Get-AzRoleDefinition retrieves Azure RBAC roles; directory roles are a
+        different permission system. ConvertTo-Json exports an object to JSON,
+        whereas ConvertFrom-Json parses JSON into an object.
+      explanation: |
+        Correct selections: Get-AzRoleDefinition and ConvertTo-Json.
+
+        ```powershell
+        Get-AzRoleDefinition -Name "Reader" | ConvertTo-Json
+        ```
+
+        Role1 must be based on the built-in Reader role. Get-AzRoleDefinition
+        retrieves Reader's Azure role-based access control (RBAC) definition.
+        The pipe passes that object to ConvertTo-Json, which serializes it into
+        JSON so it can be used as the starting point for the custom role.
+
+        This command does not create Role1. Save the output if using a JSON-file
+        workflow, change the name to Role1, remove the existing role ID, set
+        IsCustom to true, and configure the description, required permissions,
+        and AssignableScopes. Then create the role using New-AzRoleDefinition
+        with the edited input file. Creating a role definition is separate from
+        assigning that role to a user, group, or service principal.
+
+        Find-RoleCapability concerns PowerShell module role capabilities.
+        Get-AzureADDirectoryRole retrieves legacy Azure AD directory roles,
+        rather than Azure resource RBAC roles. Get-AzResourceProvider retrieves
+        resource provider information rather than a role definition.
+        ConvertFrom-Json parses JSON into an object, the opposite direction.
+        ConvertFrom-String parses text, and ConvertTo-Xml produces XML rather
+        than the JSON used by this custom-role workflow.
+
+        Exam focus: Manage Azure identities and governance → Manage access to
+        Azure resources. Retrieve the baseline role, export and customize its
+        definition, create the custom role, and assign it at the required scope.
+
+        [Microsoft Learn: Create a custom role with Azure PowerShell](https://learn.microsoft.com/en-us/azure/role-based-access-control/tutorial-custom-role-powershell)
+
+    - id: '005'
+      skill: Manage Azure identities and governance
+      sub-skill: Manage Microsoft Entra users and groups
+      question: |
+        You need to recommend a solution to automate the configuration for
+        the finance department users. The solution must meet the technical
+        requirements.
+        What should you include in the recommendation?
+      choices:
+        A: Azure AD B2C
+        B: Dynamic groups and Conditional Access policies
+        C: Azure AD Identity Protection
+        D: An Azure logic app and the Microsoft Identity Management (MIM) client
+      answer: B
+      user_answer: B
+      user_result: correct
+      learning_note: |
+        Dynamic membership determines who is in the finance group; Conditional
+        Access determines when members must use MFA. Use the synchronized
+        department attribute, rather than assuming on-premises OU membership
+        automatically becomes an Entra group.
+      explanation: |
+        B. Dynamic groups and Conditional Access policies meet the requirement
+        to automate MFA configuration for finance users only.
+
+        Create a dynamic user security group using the synchronized department
+        attribute. For example, if the actual attribute value is Finance:
+
+        ```text
+        (user.department -eq "Finance")
+        ```
+
+        Create a Conditional Access policy targeting that group and the required
+        cloud resources, with the Grant control Require multifactor authentication.
+        Enable the policy after validating its targeting. New finance users enter
+        the group automatically after synchronization and dynamic membership
+        processing, without manually adding each user or enabling per-user MFA.
+        Attribute changes also update membership; processing is not instantaneous.
+
+        The case specifies Premium P1, which supports dynamic membership and
+        Conditional Access. Appropriate P1 licenses are required for users covered
+        by these features; a tenant tier alone is not a license for every user.
+
+        A is for customer identities, rather than workforce department-based MFA.
+        C focuses on identity risk detection and risk-based protection rather than
+        automating department membership. D introduces unnecessary custom
+        automation and identity-management components when native features meet
+        the requirement.
+
+        Azure AD is now Microsoft Entra ID. The historical finance-only requirement
+        describes this policy's targeting; other policies or platform requirements
+        can independently require MFA for other users in a current environment.
+
+        Exam focus: Manage Microsoft Entra users and groups. Attribute-based
+        dynamic membership selects the users; Conditional Access enforces MFA.
+
+        [Microsoft Learn: Dynamic membership rules](https://learn.microsoft.com/en-us/entra/identity/users/groups-dynamic-membership)
+        [Microsoft Learn: Conditional Access user and group assignments](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-users-groups)
+        [Microsoft Learn: Plan Conditional Access](https://learn.microsoft.com/en-us/entra/identity/conditional-access/plan-conditional-access)
