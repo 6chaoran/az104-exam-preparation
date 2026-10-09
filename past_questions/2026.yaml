@@ -1,7 +1,8 @@
 # AZ-104 original practice questions for the April 17, 2026 blueprint.
 # Verified October 9, 2026. These are authored practice items, not recalled exam questions.
 # Identified substantive objective change: Configure encryption at host for Azure VMs.
-# Twenty questions explore that updated objective; there are not twenty newly added topics.
+# IDs 812-831 cover encryption at host; IDs 832-851 close older coverage gaps.
+# Forty original practice questions; these are not forty newly added blueprint topics.
 # Comparison and historical-evidence limits: ../AZ-104-QUESTION-BANK-2026-COMPARISON.md
 # Blueprint: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
 
@@ -317,4 +318,397 @@
     B authorizes the disk encryption set to use the key. Secret, blob, and certificate permissions do not grant the required key operations to DES1.
     
     [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disks-enable-host-based-encryption-powershell)
+
+# Additional coverage gaps: 2025 soft-delete coverage and continuing Bicep/Container Apps objectives.
+- id: 832
+  skill: Implement and manage storage
+  sub-skill: Configure Azure Files and Azure Blob Storage
+  question: |
+    You have a Standard StorageV2 account named storage1 with hierarchical namespace and blob versioning disabled. You must recover individual blobs accidentally deleted during the previous 14 days. Which setting should you enable before a deletion occurs?
+  choices:
+    A: "Container soft delete with a 14-day retention period"
+    B: "Blob soft delete with a 14-day retention period"
+    C: "An Azure Files share snapshot"
+    D: "A lifecycle rule that deletes blobs after 14 days"
+  answer: B
+  explanation: |
+    B retains deleted blobs for recovery. Container soft delete protects whole-container deletion; file snapshots protect shares; lifecycle deletion does not provide the requested recovery protection.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-overview)
+
+- id: 833
+  skill: Implement and manage storage
+  sub-skill: Configure Azure Files and Azure Blob Storage
+  question: |
+    storage1 has blob soft delete enabled but container soft delete disabled. An administrator deletes container1, including its blobs. Solution: You use blob soft delete to recover container1 and all its contents. Does this meet the goal?
+  choices:
+    A: "Yes"
+    B: "No"
+  answer: B
+  explanation: |
+    No. Blob soft delete alone does not protect container deletion. Container soft delete must have been enabled before the container was deleted.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-container-overview)
+
+- id: 834
+  skill: Implement and manage storage
+  sub-skill: Configure Azure Files and Azure Blob Storage
+  question: |
+    You manage storage1 in the Azure portal. You need to retain accidentally deleted containers for 30 days. Which action should you take?
+  choices:
+    A: "Under Data protection, enable soft delete for containers and set retention to 30 days"
+    B: "Set the default blob access tier to Cool"
+    C: "Create a lifecycle rule that deletes containers after 30 days"
+    D: "Enable soft delete for Azure file shares only"
+  answer: A
+  explanation: |
+    A configures container recovery. Access tiers manage costs; lifecycle rules and file-share soft delete do not establish container-deletion protection.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-container-overview)
+
+- id: 835
+  skill: Implement and manage storage
+  sub-skill: Configure Azure Files and Azure Blob Storage
+  question: |
+    storage1 has hierarchical namespace and versioning disabled. Blob soft delete retains deleted blobs for seven days. An administrator deletes report.csv. Two days later you display deleted blobs in the portal. What should you do to recover report.csv?
+  choices:
+    A: "Regenerate a storage-account access key"
+    B: "Change the access tier to Hot"
+    C: "Select report.csv and use Undelete"
+    D: "Enable container soft delete now"
+  answer: C
+  explanation: |
+    C restores the deleted blob while retention is active. Key rotation and tier changes do not restore it; enabling container protection afterward does not recover this individual deletion.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-manage)
+
+- id: 836
+  skill: Implement and manage storage
+  sub-skill: Configure Azure Files and Azure Blob Storage
+  question: |
+    storage1 uses a flat namespace, with blob versioning disabled and blob soft delete enabled. An application overwrites an existing block blob by using Put Blob. You need its earlier contents. Which two actions should you perform within retention? Choose two.
+  choices:
+    A: "Call Undelete Blob to restore the soft-deleted snapshot"
+    B: "Delete the storage account"
+    C: "Enable versioning now and select a version created before the overwrite"
+    D: "Copy or promote the restored snapshot over the base blob"
+    E: "Change the account redundancy to GRS"
+  answer: AD
+  explanation: |
+    A restores the snapshot captured by the overwrite; D promotes its contents. Enabling versioning later cannot create a historical version; deletion and redundancy changes do not roll back the blob.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-manage)
+
+- id: 837
+  skill: Implement and manage storage
+  sub-skill: Configure Azure Files and Azure Blob Storage
+  question: |
+    storage1 has blob versioning and blob soft delete enabled. You delete the current blob named data.csv, leaving a previous version. You need to make that previous version accessible again as the current blob. What should you do?
+  choices:
+    A: "Only call Undelete Blob and assume it recreates the current blob"
+    B: "Select the required previous version and choose Make current version"
+    C: "Disable blob versioning"
+    D: "Enable container soft delete"
+  answer: B
+  explanation: |
+    B promotes the selected version. With versioning enabled, Undelete restores soft-deleted versions or snapshots, but does not restore the base blob as current. The other settings do not promote a version.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-blob-manage)
+
+- id: 838
+  skill: Implement and manage storage
+  sub-skill: Configure Azure Files and Azure Blob Storage
+  question: |
+    container1 was deleted when container soft-delete retention was seven days. Two days later you change retention to 30 days. No other protection is configured. You attempt to recover the original container ten days after its deletion. Can the retention change make that container recoverable?
+  choices:
+    A: "Yes, all previously deleted containers receive the new retention period"
+    B: "Yes, changing retention restarts the deletion timer"
+    C: "No, the original deletion keeps its seven-day retention period"
+    D: "No, container soft delete never permits retention changes"
+  answer: C
+  explanation: |
+    C is correct: retention changes are not retroactive. The original deletion expires under its original policy; later deletions use the new retention. Policies can be changed.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/blobs/soft-delete-container-overview)
+
+- id: 839
+  skill: Implement and manage storage
+  sub-skill: Configure Azure Files and Azure Blob Storage
+  question: |
+    storage1 has blob and container soft delete enabled. Your requirement is to prevent an administrator from accidentally deleting the storage account through Azure Resource Manager. Which additional control should you configure?
+  choices:
+    A: "Increase blob soft-delete retention to 365 days"
+    B: "Enable blob versioning"
+    C: "Change the default tier to Archive"
+    D: "Apply a CanNotDelete resource lock to the storage account"
+  answer: D
+  explanation: |
+    D blocks management-plane account deletion. Blob/container soft delete and versioning protect data operations within an existing account, while Archive is an access tier.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources)
+
+- id: 840
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
+  question: |
+    You have an ARM template named main.json. You need to generate a Bicep source file from it for review and further editing. Which command should you run?
+  choices:
+    A: "az bicep build --file main.json"
+    B: "az deployment group create --resource-group RG1 --template-file main.json"
+    C: "az bicep decompile --file main.json"
+    D: "az group export --name RG1"
+  answer: C
+  explanation: |
+    C converts ARM JSON to Bicep. Build converts in the opposite direction; deployment creates resources; export retrieves an ARM template rather than decompiling the local file. Review conversion warnings.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/decompile)
+
+- id: 841
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
+  question: |
+    You have the following Bicep declarations:
+    
+    ```bicep
+    @allowed([
+      'Standard_LRS'
+      'Standard_ZRS'
+    ])
+    param storageSku string = 'Standard_LRS'
+    ```
+    
+    The storage resource uses storageSku as sku.name. A deployment passes storageSku=Standard_GRS. What happens?
+  choices:
+    A: "The parameter value is rejected because it is outside the allowed values"
+    B: "The default Standard_LRS silently overrides the supplied value"
+    C: "The template automatically converts Standard_GRS to Standard_ZRS"
+    D: "The allowed decorator affects only the editor; deployment accepts any string"
+  answer: A
+  explanation: |
+    A is correct: the parameter constraint excludes Standard_GRS. A supplied value does not silently revert to the default or get converted to a different SKU.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameters)
+
+- id: 842
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
+  question: |
+    You have the following Bicep resource in a resource-group-scoped file:
+    
+    ```bicep
+    param accountName string
+    resource stg 'Microsoft.Storage/storageAccounts@2023-05-01' = {
+      name: accountName
+      location: resourceGroup().location
+      kind: 'StorageV2'
+      sku: {
+        name: 'Standard_LRS'
+      }
+      properties: {}
+    }
+    ```
+    
+    You must deploy the new account with zone-redundant storage. Which edit should you make?
+  choices:
+    A: "Change kind to 'Standard_ZRS'"
+    B: "Change sku.name to 'Standard_ZRS'"
+    C: "Change location to 'Standard_ZRS'"
+    D: "Rename the symbolic name stg to Standard_ZRS"
+  answer: B
+  explanation: |
+    B changes the storage redundancy SKU. kind selects account type; location selects region; the symbolic resource name is a source-code reference. The target region must support ZRS.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create)
+
+- id: 843
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
+  question: |
+    main.bicep is resource-group scoped and declares a storage account. RG1 already exists. You need to deploy the file to RG1 by using Azure CLI. Which command should you run?
+  choices:
+    A: "az bicep build --file main.bicep"
+    B: "az deployment sub create --location eastus --template-file main.bicep"
+    C: "az group create --name RG1 --location eastus"
+    D: "az deployment group create --resource-group RG1 --template-file main.bicep"
+  answer: D
+  explanation: |
+    D submits the resource-group deployment. Build only compiles the file, a subscription deployment targets a different scope, and creating RG1 does not deploy the storage resource.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/deploy-cli)
+
+- id: 844
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
+  question: |
+    You have a subscription-scoped Bicep file:
+    
+    ```bicep
+    targetScope = 'subscription'
+    resource rg 'Microsoft.Resources/resourceGroups@2022-09-01' existing = {
+      name: 'RG1'
+    }
+    module storage './storage.bicep' = {
+      name: 'storageDeployment'
+      scope: rg
+      params: {
+        accountName: 'stcontoso2026example'
+      }
+    }
+    ```
+    
+    storage.bicep is resource-group scoped and declares a storage account. RG1 exists in the current subscription. Where is the account deployed?
+  choices:
+    A: "Directly at subscription scope without a resource group"
+    B: "To a new resource group named storageDeployment"
+    C: "Into RG1"
+    D: "Into a resource group named stcontoso2026example"
+  answer: C
+  explanation: |
+    C follows the module scope rg. The module name identifies its deployment, and accountName names the storage account. Neither creates or selects a different resource group.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/modules)
+
+- id: 845
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Automate deployment of resources by using Azure Resource Manager (ARM) templates or Bicep files
+  question: |
+    You have a resource-group-scoped Bicep file containing:
+    
+    ```bicep
+    param location string = resourceGroup().location
+    resource stg 'Microsoft.Storage/storageAccounts@2023-05-01' = {
+      name: 'stcontoso2026example'
+      location: location
+      kind: 'StorageV2'
+      sku: {
+        name: 'Standard_LRS'
+      }
+      properties: {}
+    }
+    ```
+    
+    RG1 has location eastus. You deploy into RG1 and explicitly pass location=westus2. Which statement is correct?
+  choices:
+    A: "The account belongs to RG1 and is deployed in westus2"
+    B: "The account belongs to RG1 and must be deployed in eastus"
+    C: "A resource group named westus2 is automatically created"
+    D: "The parameter changes RG1 location to westus2"
+  answer: A
+  explanation: |
+    A is correct: the explicit parameter overrides its default. A resource can reside in a different region from its resource group; the parameter neither creates nor relocates that group.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameters)
+
+- id: 846
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Provision and manage containers in the Azure portal
+  question: |
+    You have a Consumption-plan container app named api1 with HTTP ingress and an HTTP scale rule. It uses single revision mode. You need at least one replica to remain running during normal operation when no requests arrive. Which setting should you configure?
+  choices:
+    A: "Set minReplicas to 0"
+    B: "Set maxReplicas to 1 and leave minReplicas at 0"
+    C: "Remove HTTP ingress"
+    D: "Set minReplicas to 1"
+  answer: D
+  explanation: |
+    D sets the running-replica floor. A permits scale-to-zero; B sets only the ceiling; removing ingress does not establish a minimum running replica.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/container-apps/scale-app)
+
+- id: 847
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Provision and manage containers in the Azure portal
+  question: |
+    api1 is a Consumption-plan container app with HTTP ingress, single revision mode, and an HTTP scale rule. It must be able to scale to zero when idle and have a configured maximum of five replicas per revision. Which settings meet the requirement?
+  choices:
+    A: "minReplicas: 1; maxReplicas: 5"
+    B: "minReplicas: 0; maxReplicas: 5"
+    C: "minReplicas: 5; maxReplicas: 5"
+    D: "minReplicas: 0; maxReplicas: 1"
+  answer: B
+  explanation: |
+    B allows an idle floor of zero and a configured ceiling of five. The other configurations either retain running replicas or cap scaling at one. Temporary maintenance replicas can exceed the normal ceiling.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/container-apps/scale-app)
+
+- id: 848
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Provision and manage containers in the Azure portal
+  question: |
+    You have this scale configuration for a container app with HTTP ingress:
+    
+    ```json
+    {
+      "minReplicas": 0,
+      "maxReplicas": 6,
+      "rules": [{
+        "name": "http-scale",
+        "http": {
+          "metadata": {
+            "concurrentRequests": "20"
+          }
+        }
+      }]
+    }
+    ```
+    
+    You must lower the HTTP scaling threshold to ten concurrent requests. Which property should you modify?
+  choices:
+    A: "minReplicas"
+    B: "maxReplicas"
+    C: "rules[0].http.metadata.concurrentRequests"
+    D: "The ingress targetPort"
+  answer: C
+  explanation: |
+    C configures the concurrency threshold. Minimum and maximum replicas set bounds; targetPort selects the application listening port. None of those controls the HTTP scaling threshold.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/container-apps/scale-app)
+
+- id: 849
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Provision and manage containers in the Azure portal
+  question: |
+    You deploy a continuously running queue-worker container app using the Consumption plan. It has no HTTP ingress, uses single revision mode, and must scale from zero when messages arrive in an Azure Storage queue. Which scaling rule should you configure?
+  choices:
+    A: "An Azure Storage queue event scale rule with the required queue metadata and authentication"
+    B: "Only an HTTP concurrency rule"
+    C: "Only a CPU-utilization rule with minReplicas set to 0"
+    D: "An App Service plan autoscale rule"
+  answer: A
+  explanation: |
+    A polls the queue independently of running replicas. HTTP does not observe queue depth; CPU alone cannot wake zero replicas. App Service autoscale targets a different hosting service.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/container-apps/scale-app)
+
+- id: 850
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Provision and manage containers in the Azure portal
+  question: |
+    You have a queue-triggered container app with HTTP ingress disabled. You use the Azure Storage queue scaler with connection-string authentication. The connection string is stored in an app secret named queue-connection. What should the scale rule authentication entry reference?
+  choices:
+    A: "The container image tag"
+    B: "The environment name"
+    C: "The ingress target port"
+    D: "The queue-connection secret, mapped to the scaler connection parameter"
+  answer: D
+  explanation: |
+    D supplies credentials to the scaler through its secret reference. Image tags, environment names, and ingress ports do not authenticate queue polling. Managed-identity authentication is a separate supported approach.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/container-apps/scale-app)
+
+- id: 851
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Provision and manage containers in the Azure portal
+  question: |
+    You deploy a container app on the Consumption plan with two tightly coupled containers. The application container requests 0.25 vCPU and 0.5 GiB memory. Its sidecar requests 0.25 vCPU and 0.5 GiB memory. Which statement correctly evaluates the allocation for each replica?
+  choices:
+    A: "Only the application container counts; the replica uses 0.25 vCPU and 0.5 GiB"
+    B: "The combined allocation is 0.5 vCPU and 1 GiB, a supported Consumption combination"
+    C: "Each container must request at least 1 vCPU"
+    D: "The containers must run in separate replicas because sidecars are unsupported"
+  answer: B
+  explanation: |
+    B adds both containers in one replica. Consumption sizing validates the total allocation; sidecars count toward it and can share a replica. A one-vCPU minimum is not required.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/container-apps/containers)
 
