@@ -1,0 +1,320 @@
+# AZ-104 original practice questions for the April 17, 2026 blueprint.
+# Verified October 9, 2026. These are authored practice items, not recalled exam questions.
+# Identified substantive objective change: Configure encryption at host for Azure VMs.
+# Twenty questions explore that updated objective; there are not twenty newly added topics.
+# Comparison and historical-evidence limits: ../AZ-104-QUESTION-BANK-2026-COMPARISON.md
+# Blueprint: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+
+- id: 812
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You plan to deploy VM1 on a supported Azure VM size. You must encrypt its temporary disk and OS/data disk caches without installing encryption software inside the guest operating system. Which feature should you enable?
+  choices:
+    A: "Azure Disk Encryption"
+    B: "Encryption at host"
+    C: "Azure Storage encryption on a blob container"
+    D: "Transport Layer Security for the application"
+  answer: B
+  explanation: |
+    B is correct: encryption starts on the Azure host and covers local disk data. A uses guest encryption; C targets blobs; D protects application traffic.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/disk-encryption)
+
+- id: 813
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You have VM1 with a supported size, no Azure Disk Encryption history, and encryption at host disabled. The security team requires encryption of the temporary disk and disk caches. Solution: You rely only on default encryption of persisted managed disks. Does this meet the goal?
+  choices:
+    A: "Yes"
+    B: "No"
+  answer: B
+  explanation: |
+    Default managed-disk encryption alone does not establish host-cache protection. Enable encryption at host for the stated local-disk requirement.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/disk-encryption)
+
+- id: 814
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You plan to enable encryption at host in Subscription1. The Microsoft.Compute resource provider is registered, but its EncryptionAtHost feature is NotRegistered. Which Azure CLI command should you run first?
+  choices:
+    A: "az provider register --namespace Microsoft.Storage"
+    B: "az vm encryption enable --resource-group RG1 --name VM1 --disk-encryption-keyvault Vault1"
+    C: "az feature register --namespace Microsoft.Compute --name EncryptionAtHost"
+    D: "az keyvault update --name Vault1 --enabled-for-disk-encryption true"
+  answer: C
+  explanation: |
+    C registers the required subscription feature. Provider registration alone is insufficient; the other commands configure different encryption mechanisms or resources.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/disks-enable-host-based-encryption-cli)
+
+- id: 815
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You register the EncryptionAtHost feature in Subscription1. You need to confirm that registration has completed before deploying VM1. Which command should you use?
+  choices:
+    A: "az feature show --namespace Microsoft.Compute --name EncryptionAtHost"
+    B: "az vm show --resource-group RG1 --name VM1 --query provisioningState"
+    C: "az keyvault key list --vault-name Vault1"
+    D: "az disk list --resource-group RG1"
+  answer: A
+  explanation: |
+    A returns the feature registration state; wait for Registered. VM provisioning, key listings, and disk listings do not verify subscription feature readiness.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/disks-enable-host-based-encryption-cli)
+
+- id: 816
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You have a running VM named VM1. Its size supports encryption at host, the subscription feature is registered, and VM1 has never used Azure Disk Encryption. You need to enable encryption at host on VM1. What should you do first?
+  choices:
+    A: "Enable BitLocker inside VM1"
+    B: "Create a storage-account shared access signature"
+    C: "Restart VM1 from its guest operating system"
+    D: "Stop and deallocate VM1"
+  answer: D
+  explanation: |
+    D releases the VM allocation before the encryption update. A guest restart does not deallocate it; BitLocker and SAS tokens do not enable host encryption.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disks-enable-host-based-encryption-powershell)
+
+- id: 817
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    VM1 has been deallocated and meets all encryption-at-host prerequisites. You need to enable the feature by using Azure CLI. Which command should you run?
+  choices:
+    A: "az vm update -g RG1 -n VM1 --set securityProfile.encryptionAtHost=true"
+    B: "az vm update -g RG1 -n VM1 --set storageProfile.osDisk.caching=ReadOnly"
+    C: "az vm encryption enable -g RG1 -n VM1 --disk-encryption-keyvault Vault1"
+    D: "az vm update -g RG1 -n VM1 --set diagnosticsProfile.bootDiagnostics.enabled=true"
+  answer: A
+  explanation: |
+    A updates the host-encryption property. C enables Azure Disk Encryption; cache mode and boot diagnostics do not switch on encryption at host.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/disks-enable-host-based-encryption-cli)
+
+- id: 818
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You manage VM1 by using Azure PowerShell. VM1 is deallocated, has a supported size, and meets the subscription prerequisites. You retrieve it into $vm by using Get-AzVM. Which command enables encryption at host?
+  choices:
+    A: "Set-AzVMDiskEncryptionExtension -ResourceGroupName RG1 -VMName VM1"
+    B: "Update-AzVM -ResourceGroupName RG1 -VM $vm -EncryptionAtHost $true"
+    C: "Start-AzVM -ResourceGroupName RG1 -Name VM1"
+    D: "Set-AzVMOSDisk -VM $vm -Caching ReadOnly"
+  answer: B
+  explanation: |
+    B changes the host-encryption setting. The encryption extension implements ADE; starting a VM or changing cache mode does not configure this setting.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disks-enable-host-based-encryption-powershell)
+
+- id: 819
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You deployed VM1 with encryption at host. You need to verify the VM setting by using Azure CLI. Which query should you use with az vm show -g RG1 -n VM1?
+  choices:
+    A: "--query storageProfile.osDisk.diskSizeGb"
+    B: "--query hardwareProfile.vmSize"
+    C: "--query securityProfile.encryptionAtHost"
+    D: "--query diagnosticsProfile.bootDiagnostics.enabled"
+  answer: C
+  explanation: |
+    C reads the actual host-encryption setting. Disk capacity, VM size, and diagnostics are separate properties and cannot confirm that it is enabled.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/disks-enable-host-based-encryption-cli)
+
+- id: 820
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You plan to enable encryption at host on an older VM size. You inspect the regional Microsoft.Compute resource SKU capabilities. Which capability must have the value True?
+  choices:
+    A: "PremiumIO"
+    B: "AcceleratedNetworkingEnabled"
+    C: "UltraSSDAvailable"
+    D: "EncryptionAtHostSupported"
+  answer: D
+  explanation: |
+    D explicitly identifies size support for host encryption. Premium storage, accelerated networking, and Ultra Disk support test different capabilities.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/linux/disks-enable-host-based-encryption-cli)
+
+- id: 821
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You create VM1 in the Azure portal. Its size supports encryption at host, the subscription feature is registered, and platform-managed keys are acceptable. Where should you enable encryption at host during creation?
+  choices:
+    A: "The Disks tab of the VM creation workflow"
+    B: "The inbound port rules on the Networking tab"
+    C: "The Access control (IAM) page of a storage account"
+    D: "The backup policy in a Recovery Services vault"
+  answer: A
+  explanation: |
+    A contains the host-encryption selection. Networking, storage RBAC, and backup settings cannot substitute for the VM disk-security setting.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-portal)
+
+- id: 822
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You plan to deploy VM1 with encryption at host and platform-managed keys only. The subscription feature is registered and the VM size is supported. Solution: You enable encryption at host without creating an Azure Key Vault or a disk encryption set. Does this meet the goal?
+  choices:
+    A: "Yes"
+    B: "No"
+  answer: A
+  explanation: |
+    Yes. A customer key store and disk encryption set are needed for customer-managed keys, rather than the platform-managed-key configuration specified here.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disks-enable-host-based-encryption-powershell)
+
+- id: 823
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You plan to deploy VM1 with encryption at host. The OS and data disk caches must use your own key in Azure Key Vault. Which two actions should you perform? Each correct answer presents part of the solution. Choose two.
+  choices:
+    A: "Create a disk encryption set referencing the key and authorize its identity to use the key"
+    B: "Enable Azure Disk Encryption on the same VM"
+    C: "Store the key in a storage-account access key setting"
+    D: "Associate the OS and data managed disks with the disk encryption set"
+    E: "Create a Recovery Services vault"
+  answer: AD
+  explanation: |
+    A and D connect the managed disks and their caches to the customer key. ADE is incompatible; storage-account keys and backup vaults serve different purposes.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-portal)
+
+- id: 824
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    VM1 uses encryption at host. Its OS and data managed disks use a customer-managed key through a disk encryption set. VM1 also has a temporary disk. Which key encrypts the temporary disk?
+  choices:
+    A: "The customer-managed key used by the OS disk"
+    B: "The administrator password of VM1"
+    C: "A platform-managed key"
+    D: "A storage-account access key"
+  answer: C
+  explanation: |
+    C is correct: temporary-disk encryption uses platform-managed keys even when managed-disk caches use a customer-managed key. Passwords and access keys are not disk-encryption keys.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-host-based-encryption-portal)
+
+- id: 825
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You enable encryption at host on VM1. Its OS disk uses a platform-managed key and its data disk uses a customer-managed key. Which statement describes encryption of the disk caches?
+  choices:
+    A: "Both caches must use the customer-managed key"
+    B: "Each cache uses the key-management type selected for its corresponding disk"
+    C: "Both caches use the VM administrator password"
+    D: "The data disk cache remains unencrypted"
+  answer: B
+  explanation: |
+    B is correct: cache key management follows its corresponding disk. Mixed disk key types do not force one key type on both caches.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/disk-encryption)
+
+- id: 826
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    VM1 currently uses Azure Disk Encryption. Its VM size supports encryption at host. Solution: You enable encryption at host on VM1 while retaining Azure Disk Encryption. Does this meet the goal of configuring encryption at host?
+  choices:
+    A: "Yes"
+    B: "No"
+  answer: B
+  explanation: |
+    No. Encryption at host and ADE cannot be enabled together on this VM. Supported size alone does not remove the incompatibility.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disks-enable-host-based-encryption-powershell)
+
+- id: 827
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    VM1 previously used Azure Disk Encryption. You removed the encryption extension and disabled ADE. You want to enable encryption at host on the same VM. Solution: You deallocate VM1 and set encryptionAtHost to true. Does this meet the goal?
+  choices:
+    A: "Yes"
+    B: "No"
+  answer: B
+  explanation: |
+    No. The documented restriction includes VMs that ever had ADE enabled. Removing the extension does not remove that history; plan a supported replacement deployment.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disks-enable-host-based-encryption-powershell)
+
+- id: 828
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You have a Flexible virtual machine scale set named VMSS1 with two existing instances. No instance has used Azure Disk Encryption. You enable encryption at host in the scale-set model and create a third instance. Which statement is correct?
+  choices:
+    A: "All existing instances are immediately encrypted without any allocation change"
+    B: "Only the oldest instance is automatically encrypted"
+    C: "Encryption at host cannot be used with any scale set"
+    D: "The new instance is automatically encrypted; existing instances require deallocation and reallocation"
+  answer: D
+  explanation: |
+    D distinguishes model changes from existing allocations. New instances inherit host encryption; the existing instances require deallocation and reallocation to apply it.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disks-enable-host-based-encryption-powershell)
+
+- id: 829
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You deploy VM1 with encryption at host enabled. An application is sensitive to guest CPU usage. Which statement correctly describes where disk encryption is performed?
+  choices:
+    A: "Inside the guest by BitLocker for every operating system"
+    B: "On the Azure host without consuming VM1 guest CPU for the encryption"
+    C: "Inside the application by its TLS library"
+    D: "Only in Azure Key Vault, which stores every disk block"
+  answer: B
+  explanation: |
+    B is correct: host encryption does not consume the guest CPU. BitLocker is guest encryption; TLS handles traffic; Key Vault stores keys rather than disk blocks.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/disk-encryption)
+
+- id: 830
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    You plan to use encryption at host with customer-managed keys for VM1. Vault1 stores the key and has soft delete enabled. Purge protection is disabled. Which additional Vault1 setting is required for managed-disk customer-managed encryption?
+  choices:
+    A: "Enable purge protection"
+    B: "Enable anonymous public access"
+    C: "Configure a blob lifecycle rule"
+    D: "Create an Azure Files snapshot"
+  answer: A
+  explanation: |
+    A prevents permanent key deletion during retention and is required for this configuration. Public access, blob rules, and file snapshots do not protect the Key Vault key.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-customer-managed-keys-portal)
+
+- id: 831
+  skill: Deploy and manage Azure compute resources
+  sub-skill: Create and configure virtual machines
+  question: |
+    VM1 uses encryption at host and customer-managed keys for its managed disks. DES1 is a disk encryption set with a system-assigned managed identity. Vault1 uses the access-policy permission model. DES1 cannot access the key. Which principal and key permissions should you configure?
+  choices:
+    A: "VM1 administrator account with secret list permission"
+    B: "DES1 managed identity with get, wrapKey, and unwrapKey permissions"
+    C: "The storage account identity with blob read permission"
+    D: "The subscription billing administrator with certificate import permission"
+  answer: B
+  explanation: |
+    B authorizes the disk encryption set to use the key. Secret, blob, and certificate permissions do not grant the required key operations to DES1.
+    
+    [Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disks-enable-host-based-encryption-powershell)
+
